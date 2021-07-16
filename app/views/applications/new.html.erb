@@ -1,29 +1,31 @@
-<%= form_for(@application) do |form| %>
+<h1>New Application</h1>
+<br>
+<%= form_tag("/applications/:id", method: 'post') do %>
   <p>
-    <%= form.label "Name" %><br />
-    <%= form.text_field :name %>
+    <%= label_tag "Name" %><br />
+    <%= text_field_tag :name %>
   </p>
   <p>
-    <%= form.label "Street Adress" %><br />
-    <%= form.text_area :street %>
+    <%= label_tag "Street Adress" %><br />
+    <%= text_field_tag  :street %>
   </p>
   <p>
-  <%= form.label "City" %><br />
-  <%= form.text_field :city %>
+  <%= label_tag "City" %><br />
+  <%= text_field_tag  :city %>
 </p>
 <p>
-  <%= form.label "State" %><br />
-  <%= form.text_field :state %>
+  <%= label_tag "State" %><br />
+  <%= text_field_tag  :state %>
 </p>
 <p>
-  <%= form.label "Zip Code" %><br />
-  <%= form.text_field :zip_code %>
+  <%= label_tag "Zip Code" %><br />
+  <%= text_field_tag  :zip_code %>
 </p>
 <p>
-  <%= form.label "Description" %><br />
-  <%= form.text_field :description %>
+  <%= label_tag "Description" %><br />
+  <%= text_field_tag  :description %>
 </p>
   <p>
-    <%= form.submit %>
+    <button type="submit" class='btn btn-success'><%= submit_tag("Create Application") %></button>
   </p>
 <% end %>
