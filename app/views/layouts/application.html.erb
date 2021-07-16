@@ -16,11 +16,9 @@
   </head>
 
   <body>
-    <% flash.each do |type, msg| %>
-      <div>
-        <%= msg %>
-      </div>
-    <% end %>
+  <% if notice %>
+    <%= render 'layouts/flash' %>
+  <% end %>
     <section>
       <p><%= link_to "Pets", "/pets" %></p>
       <p><%= link_to "Shelters", "/shelters" %></p>

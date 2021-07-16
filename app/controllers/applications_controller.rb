@@ -19,7 +19,8 @@ class ApplicationsController < ApplicationController
       flash.alert = "Unable to Process Request, Forms Missing"
       redirect_to "/applications/#{@application.id}"
     else
-      flash.alert = "Unable to Process Request, Forms Missing"
+      flash[:errors] = @application.errors.full_messages
+      render 'new'
     end
   end
 

@@ -31,7 +31,6 @@ RSpec.describe 'new application page' do
 
     click_on "Create Application"
 
-    # expect(current_path).to eq('/applications/new')
-    expect(page).to have_content("Unable to Process Request, Forms Missing")
+    expect(page).to have_content("Name can't be blank")
   end
 end
