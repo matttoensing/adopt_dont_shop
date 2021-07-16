@@ -4,7 +4,8 @@ FactoryBot.define do
     street  { Faker::Address.street_name  }
     city  { Faker::Address.city }
     state  { Faker::Address.state }
-    zip_code  { Address.zip_code }
+    zip_code  { Faker::Address.zip_code }
     description  { Faker::Lorem.paragraphs(rand(2..8)) }
+    status { "In Progress" }
   end
 end
