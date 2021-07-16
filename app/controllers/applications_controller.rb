@@ -13,7 +13,7 @@ class ApplicationsController < ApplicationController
     @application.status = "In Progress"
     @application.save
 
-    redirect_to application_path(@application)
+    redirect_to "/applications/#{@application.id}"
   end
 
   private
