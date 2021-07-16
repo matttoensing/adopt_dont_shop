@@ -1,6 +1,17 @@
 <h1>New Application</h1>
-<br>
-<%= form_tag("/applications/:id", method: 'post') do %>
+<%= form_tag("/applications", method: 'post') do %>
+<% if @application.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@application.errors.count, "error") %>
+    Prohibited this Application from being Created: </h2>
+    <ul>
+        <% application.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <br>
   <p>
     <%= label_tag "Name" %><br />
     <%= text_field_tag :name %>
@@ -26,6 +37,6 @@
   <%= text_field_tag  :description %>
 </p>
   <p>
-    <button type="submit" class='btn btn-success'><%= submit_tag("Create Application") %></button>
+    <%= submit_tag("Create Application", method: :post) %>
   </p>
 <% end %>
