@@ -55,6 +55,32 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.order_in_reverse).to eq(expected)
       end
     end
+
+    describe '#shelters_with_pending_apps' do
+      it 'returns all shelters with pending applications' do
+        Shelter.destroy_all
+        
+        shelter1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
+        shelter2 = Shelter.create!(name: 'Westminster shelter', city: 'Westminster, CO', foster_program: true, rank: 7)
+        shelter3 = Shelter.create!(name: 'Boulder shelter', city: 'Boulder, CO', foster_program: true, rank: 9)
+        application1 = create(:application, status: "Pending")
+        application2 = create(:application)
+        application3 = create(:application, status: "Pending")
+        application4 = create(:application, status: "Pending")
+        application5 = create(:application)
+        application6 = create(:application)
+        pet1 = create(:pet, shelter_id: shelter1.id)
+        pet2 = create(:pet, shelter_id: shelter2.id)
+        pet3 = create(:pet, shelter_id: shelter2.id)
+        petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id)
+        petapp1 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id)
+        petapp1 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id)
+
+        expected = [shelter1, shelter2]
+
+        expect(Shelter.shelters_with_pending_apps).to eq(expected)
+      end
+    end
   end
 
   describe 'instance methods' do
