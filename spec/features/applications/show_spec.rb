@@ -45,7 +45,7 @@ RSpec.describe 'application show page'  do
     fill_in "search", with: pet.name
     click_on 'Submit'
 
-    expect(page).to have_button("Adopt #{pet.name}")
+    expect(page).to have_link("Adopt #{pet.name}")
   end
 
   it 'user clicks on adopt to add pet to application' do
