@@ -89,7 +89,7 @@ RSpec.describe 'application show page'  do
 
     fill_in "description", with: "I Love Animals!"
 
-    expect(page).to have_button("Submit Description")
+    expect(page).to have_button("Submit Application")
   end
 
   it 'can submit button to show application pending' do
@@ -108,12 +108,29 @@ RSpec.describe 'application show page'  do
     click_on "Adopt #{pet.name}"
 
     fill_in "description", with: "I Love Animals!"
-    click_on "Submit Description"
+    click_on "Submit Application"
 
     expect(current_path).to eq("/applications/#{application.id}")
     expect(page).to have_content("Pending")
     expect(page).to have_content("Pets Applied For: #{pet.name}")
     expect(page).to_not have_button('Submit')
     expect(page).to_not have_content("Add a Pet to this Application")
+  end
+
+  it 'will not desplay a text field to enter description if no pets are added to application' do
+    Pet.destroy_all
+    Shelter.destroy_all
+    Application.destroy_all
+
+    shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
+    application = create(:application)
+    pet = create(:pet, age: 6, shelter_id: shelter.id)
+
+    visit "/applications/#{application.id}"
+
+    fill_in "search", with: pet.name
+    click_on 'Submit'
+
+    expect(page).to_not have_button("Submit Application")
   end
 end
