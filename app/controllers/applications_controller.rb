@@ -15,7 +15,7 @@ class ApplicationsController < ApplicationController
       @application = Application.find(params[:id])
       @pet_on_app = @application.pets
     end
-  
+
     if params[:description]
       @application = Application.find(params[:id])
       @application.change_status_pending
