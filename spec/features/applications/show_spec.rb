@@ -133,4 +133,31 @@ RSpec.describe 'application show page'  do
 
     expect(page).to_not have_button("Submit Application")
   end
+
+  it 'will display pets on page with partial lower case name search' do
+    shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
+    application = create(:application)
+    pet1 = create(:pet, name: "Fluffy", shelter_id: shelter.id)
+    pet2 = create(:pet, name: "Baxter", shelter_id: shelter.id)
+
+    visit "/applications/#{application.id}"
+
+    fill_in "search", with: "baxt"
+    click_on 'Submit'
+
+    expect(page).to have_content("Baxter")
+    expect(page).to have_content("#{pet2.age}")
+    expect(page).to have_content(pet2.breed)
+    expect(page).to have_content(pet2.adoptable)
+
+    visit "/applications/#{application.id}"
+
+    fill_in "search", with: "fluf"
+    click_on 'Submit'
+
+    expect(page).to have_content("Fluffy")
+    expect(page).to have_content("#{pet1.age}")
+    expect(page).to have_content(pet1.breed)
+    expect(page).to have_content(pet1.adoptable)
+  end
 end
