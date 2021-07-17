@@ -4,5 +4,6 @@ class PetApplicationsController < ApplicationController
     @application = Application.find(params[:application_id])
     @pet = Pet.find(params[:pet_id])
     @petapplication = PetApplication.create!(application_id: params[:application_id], pet_id: params[:pet_id])
+    redirect_to(controller: 'applications', action: 'show', id: @application.id, pet: @pet.name)
   end
 end

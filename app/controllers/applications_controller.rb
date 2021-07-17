@@ -10,6 +10,11 @@ class ApplicationsController < ApplicationController
     else
       @application = Application.find(params[:id])
     end
+
+    if params[:pet]
+      @application = Application.find(params[:id])
+      @pet_on_app = Pet.find_by_search_name(params[:pet])
+    end
   end
 
   def new

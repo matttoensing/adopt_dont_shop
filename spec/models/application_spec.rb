@@ -30,5 +30,22 @@ RSpec.describe Application do
         expect(Application.find_pet_by_name(pet4.name)).to eq([pet4])
       end
     end
+
+    describe '#pets_on_application' do
+      it 'can find all pets on an application' do
+        Application.destroy_all
+        Pet.destroy_all
+
+        shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
+        application = create(:application)
+        pet1 = create(:pet, age: 6, shelter_id: shelter.id)
+        pet2 = create(:pet, age: 8, shelter_id: shelter.id)
+        pet3 = create(:pet, age: 2, shelter_id: shelter.id)
+        pet4 = create(:pet, age: 3, shelter_id: shelter.id)
+        pet_app = PetApplication.create!(pet_id: pet1.id, application_id: application.id)
+
+        expect(Application.pets_on_application(pet1.id)).to eq([pet1])
+      end
+    end
   end
 end

@@ -4,6 +4,12 @@
 <p><%= @application.description %></p>
 <p>Application Status: <%= @application.status %></p>
 
+<% if @pet_on_app %>
+  <%= @pet_on_app.each do |pet| %>
+  <p><%= pet.name %></p>
+  <% end %>
+<% end %>
+
 
 <%= form_tag("/applications/#{@application.id}?seach=name", method: :get, local: true) do %>
   <%= label_tag(:search, "Add a Pet to this Application") %>
