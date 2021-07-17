@@ -13,7 +13,7 @@ class ApplicationsController < ApplicationController
 
     if params[:pet]
       @application = Application.find(params[:id])
-      @pet_on_app = Pet.find_by_search_name(params[:pet])
+      @pet_on_app = @application.pets
     end
   end
 
