@@ -15,11 +15,11 @@ class ApplicationsController < ApplicationController
       @application = Application.find(params[:id])
       @pet_on_app = @application.pets
     end
-require "pry"; binding.pry
-    if params[:desription]
+  
+    if params[:description]
       @application = Application.find(params[:id])
       @application.change_status_pending
-      @pet_on_app = @application.pets
+      @pets_for_app = @application.pets
     end
   end
 

@@ -10,20 +10,28 @@
   <% end %>
 <% end %>
 
+<% if @pets_for_app %>
+  <%= @pets_for_app.each do |pet| %>
+  <p>Pets Applied For: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
+  <% end %>
+<% end %>
+
 <% if @pet_on_app %>
 <%= form_tag("/applications/#{@application.id}?description=complete", method: :get) do %>
 <div class="form-group">
   <label for="exampleFormControlTextarea1"><%= label_tag(:description, "Why Would You Make a Great Pet Owner?") %></label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"><%= text_field_tag(:description, params[:description]) %></textarea><br>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"<%= text_field_tag(:description, params[:description]) %></textarea><br>
     <%= submit_tag("Submit Description") %>
 </div>
-<% end %>
+  <% end %>
 <% end %>
 
+<% if !@pets_for_app %>
 <%= form_tag("/applications/#{@application.id}?seach=name", method: :get, local: true) do %>
   <%= label_tag(:search, "Add a Pet to this Application") %>
   <%= text_field_tag(:search, params[:search]) %>
   <%= submit_tag('Submit') %><br>
+<% end %>
 <% end %>
 
 
@@ -37,5 +45,3 @@
     <%= button_to "Adopt #{pet.name}", { :controller => 'pet_applications', :action => "update", :pet_id => pet.id, :application_id => @application.id, :method => :patch } %>
   <% end %>
 <% end %>
-
-{:controller => "pet_applications", :action => "update", pet.id => pet.id, application_id => @application.id, method: :patch }
