@@ -11,7 +11,7 @@
 <% end %>
 
 <% if @pet_on_app %>
-<%= form_tag("/applications/#{@application.id}/books?description=complete", method: :get) do %>
+<%= form_tag("/applications/#{@application.id}?description=complete", method: :get) do %>
 <div class="form-group">
   <label for="exampleFormControlTextarea1"><%= label_tag(:description, "Why Would You Make a Great Pet Owner?") %></label>
   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"><%= text_field_tag(:description, params[:description]) %></textarea><br>
