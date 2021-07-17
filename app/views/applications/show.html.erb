@@ -19,7 +19,7 @@
     <p>Age: <%= pet.age %></p>
     <p>Breed: <%= pet.breed %></p>
     <p>Adoptable: <%= pet.adoptable %></p>
-    <%= link_to "Adopt #{pet.name}", '/petapplications', { :controller => 'pet_applications', :action => "update", :pet_id => pet.id, :application_id => @application.id, :method => :patch } %>
+    <%= button_to "Adopt #{pet.name}", { :controller => 'pet_applications', :action => "update", :pet_id => pet.id, :application_id => @application.id, :method => :patch } %>
   <% end %>
 <% end %>
 
