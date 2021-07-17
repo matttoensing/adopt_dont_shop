@@ -33,6 +33,7 @@ RSpec.describe Application do
 
     describe '#pets_on_application' do
       it 'can find all pets on an application' do
+        PetApplication.destroy_all
         Application.destroy_all
         Pet.destroy_all
 
