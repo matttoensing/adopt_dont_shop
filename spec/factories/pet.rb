@@ -3,6 +3,6 @@ FactoryBot.define do
     name { Faker::Creature::Dog.name }
     breed  { Faker::Creature::Dog.breed }
     adoptable { true }
-    age { 4 }
+    age { Faker::Number.between(from: 1, to: 13) }
   end
 end
