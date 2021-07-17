@@ -45,9 +45,9 @@ RSpec.describe Pet, type: :model do
         expect(Pet.find_by_search_name('Clawdia')).to eq([@pet_2])
       end
 
-      it 'can return a pet with a partial name' do
-        expect(Pet.find_by_search_name('Pira')).to eq([@pet_1])
-        expect(Pet.find_by_search_name('Claw')).to eq([@pet_2])
+      it 'can return a pet with a partial lower case name' do
+        expect(Pet.find_by_search_name('pira')).to eq([@pet_1])
+        expect(Pet.find_by_search_name('claw')).to eq([@pet_2])
       end
     end
   end
