@@ -45,11 +45,12 @@ RSpec.describe 'application show page'  do
     fill_in "search", with: pet.name
     click_on 'Submit'
 
-    expect(page).to have_link("Adopt #{pet.name}")
+    expect(page).to have_button("Adopt #{pet.name}")
   end
 
   it 'user clicks on adopt to add pet to application' do
     Pet.destroy_all
+    Application.destroy_all
 
     shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
     application = create(:application)
