@@ -6,8 +6,18 @@
 
 <% if @pet_on_app %>
   <%= @pet_on_app.each do |pet| %>
-  <p>Pets Applied For: <%= pet.name %></p>
+  <p>Pets Applied For: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
   <% end %>
+<% end %>
+
+<% if @pet_on_app %>
+<%= form_tag("/applications/#{@application.id}/books?description=complete", method: :get) do %>
+<div class="form-group">
+  <label for="exampleFormControlTextarea1"><%= label_tag(:description, "Why Would You Make a Great Pet Owner?") %></label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"><%= text_field_tag(:description, params[:description]) %></textarea><br>
+    <%= submit_tag("Submit Description") %>
+</div>
+<% end %>
 <% end %>
 
 <%= form_tag("/applications/#{@application.id}?seach=name", method: :get, local: true) do %>
