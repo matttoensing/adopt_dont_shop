@@ -15,4 +15,13 @@ class Pet < ApplicationRecord
   def self.adoptable
     where(adoptable: true)
   end
+
+  def self.find_by_search_name(search)
+    Pet.where('name LIKE ?', "%#{search}%")
+  end
 end
+
+# def self.search(search)
+#   return where("0=1") if search !~ /\w{4}/
+#   where("lower(title) LIKE lower(:term)", term: "%#{search}%")
+# end

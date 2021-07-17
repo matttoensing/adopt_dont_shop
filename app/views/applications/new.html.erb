@@ -1,0 +1,43 @@
+<h1>New Application</h1>
+<%= form_tag("/applications/:id", method: 'post') do %>
+<% if @application.errors.any? %>
+<div class="alert alert-danger" role="alert">
+  <h3><%= pluralize(@application.errors.count, "Error") %>
+    Prohibited this Application from being Created: </h3>
+    <ul>
+        <% @application.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+      </div>
+    <% end %>
+    <br>
+  <p>
+    <%= label_tag "Name" %><br />
+    <%= text_field_tag :name %>
+  </p>
+  <p>
+    <%= label_tag "Street Adress" %><br />
+    <%= text_field_tag  :street %>
+  </p>
+  <p>
+  <%= label_tag "City" %><br />
+  <%= text_field_tag  :city %>
+</p>
+<p>
+  <%= label_tag "State" %><br />
+  <%= text_field_tag  :state %>
+</p>
+<p>
+  <%= label_tag "Zip Code" %><br />
+  <%= text_field_tag  :zip_code %>
+</p>
+<p>
+  <%= label_tag "Description" %><br />
+  <%= text_field_tag  :description %>
+</p>
+  <p>
+    <%= submit_tag("Create Application", method: :post) %>
+  </p>
+<% end %>

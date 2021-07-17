@@ -31,4 +31,10 @@ class Shelter < ApplicationRecord
   def shelter_pets_filtered_by_age(age_filter)
     adoptable_pets.where('age >= ?', age_filter)
   end
+
+  def self.find_pet_by_name(search_name)
+    require "pry"; binding.pry
+    # Shelter.joins(:pets).select('pets.name AS pets_name').where('pets.name LIKE ?', search_name)
+    Shelter.joins(:pets).select('pets.name FROM pets').where('pets.name LIKE ?', search_name)
+  end
 end
