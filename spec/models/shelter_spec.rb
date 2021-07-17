@@ -41,6 +41,14 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.order_by_number_of_pets).to eq([@shelter_1, @shelter_3, @shelter_2])
       end
     end
+
+    describe '#find_pet_by_name' do
+      xit 'can find pets by a given name' do
+        expected = [@pet_2]
+
+        expect(Shelter.find_pet_by_name('Clawdia')).to eq(expected)
+      end
+    end
   end
 
   describe 'instance methods' do

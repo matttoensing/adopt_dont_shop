@@ -3,3 +3,9 @@
 <p><%= @application.city %>, <%= @application.state %> <%= @application.zip_code %></p>
 <p><%= @application.description %></p>
 <p>Application Status: <%= @application.status %></p>
+
+<%= form_tag(search_pets_path(@application.id, search: :name), method: :get, local: true) do %>
+  <%= label_tag(:search, "Add a Pet to this Application") %>
+  <%= text_field_tag(:search, params[:search]) %>
+  <%= submit_tag('Submit') %>
+<% end %>

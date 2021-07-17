@@ -16,6 +16,8 @@ RSpec.describe 'application show page'  do
   end
 
   it 'has a section where you can search for a specific pet' do
+    Pet.destroy_all
+    
     shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
     application = create(:application)
     pet = create(:pet, age: 6, shelter_id: shelter.id)
@@ -24,12 +26,13 @@ RSpec.describe 'application show page'  do
 
     expect(page).to have_content("Add a Pet to this Application")
 
-    fill_in "Search For Pets", with: pet.name
+    fill_in "search", with: pet.name
+    click_on 'Submit'
 
-    expect(page).to have_content(pet.name)
-    expect(page).to have_content(pet.breed)
-    expect(page).to have_content(pet.age)
-    expect(page).to have_content(pet.adoptable)
+    expect(page).to have_content("Name: #{pet.name}")
+    expect(page).to have_content("Breed: #{pet.breed}")
+    expect(page).to have_content("Age: #{pet.age}")
+    expect(page).to have_content("Adoptable: #{pet.adoptable}")
 #   Searching for Pets for an Application
 #
 # As a visitor

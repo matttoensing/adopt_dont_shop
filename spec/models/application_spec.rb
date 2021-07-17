@@ -18,7 +18,7 @@ RSpec.describe Application do
 
   describe 'instance methods' do
     describe '#find_pet_by_name' do
-      it 'can find a pet by a given name' do
+      xit 'can find a pet by a given name' do
         shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
         application = create(:application)
         pet1 = create(:pet, age: 6, shelter_id: shelter.id)
