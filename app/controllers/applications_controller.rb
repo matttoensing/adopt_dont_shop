@@ -10,6 +10,17 @@ class ApplicationsController < ApplicationController
     else
       @application = Application.find(params[:id])
     end
+
+    if params[:pet]
+      @application = Application.find(params[:id])
+      @pet_on_app = @application.pets
+    end
+  
+    if params[:description]
+      @application = Application.find(params[:id])
+      @application.change_status_pending
+      @pets_for_app = @application.pets
+    end
   end
 
   def new

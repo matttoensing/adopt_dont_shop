@@ -32,9 +32,7 @@ class Shelter < ApplicationRecord
     adoptable_pets.where('age >= ?', age_filter)
   end
 
-  def self.find_pet_by_name(search_name)
-    require "pry"; binding.pry
-    # Shelter.joins(:pets).select('pets.name AS pets_name').where('pets.name LIKE ?', search_name)
-    Shelter.joins(:pets).select('pets.name FROM pets').where('pets.name LIKE ?', search_name)
+  def self.order_in_reverse
+    Shelter.find_by_sql("SELECT * FROM shelters ORDER BY shelters.name desc")
   end
 end

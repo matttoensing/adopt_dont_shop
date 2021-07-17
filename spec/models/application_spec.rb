@@ -17,17 +17,14 @@ RSpec.describe Application do
   end
 
   describe 'instance methods' do
-    describe '#find_pet_by_name' do
-      xit 'can find a pet by a given name' do
+    describe '#change_status_pending' do
+      it 'can change application status from in progress to pending' do
         shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
         application = create(:application)
-        pet1 = create(:pet, age: 6, shelter_id: shelter.id)
-        pet2 = create(:pet, age: 8, shelter_id: shelter.id)
-        pet3 = create(:pet, age: 2, shelter_id: shelter.id)
-        pet4 = create(:pet, age: 3, shelter_id: shelter.id)
 
-        expect(Application.find_pet_by_name(pet2.name)).to eq([pet2])
-        expect(Application.find_pet_by_name(pet4.name)).to eq([pet4])
+        application.change_status_pending
+
+        expect(application.status).to eq("Pending")
       end
     end
   end

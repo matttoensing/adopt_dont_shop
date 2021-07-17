@@ -5,7 +5,7 @@ class Pet < ApplicationRecord
   # validates :adoptable, inclusion: [true, false]
 
   belongs_to :shelter
-  has_many :pet_applications
+  has_many :pet_applications, dependent: :destroy
   has_many :applications, through: :pet_applications
 
   def shelter_name
@@ -17,7 +17,7 @@ class Pet < ApplicationRecord
   end
 
   def self.find_by_search_name(search)
-    Pet.where('name LIKE ?', "%#{search}%")
+    Pet.where('lower(name) LIKE ?', "%#{search.downcase}%")
   end
 end
 
