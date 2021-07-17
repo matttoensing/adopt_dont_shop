@@ -4,10 +4,9 @@ class ApplicationsController < ApplicationController
   end
 
   def show
-    if params[:search]
-      @pets = Pet.find_by_search_name(params[:search])
+    if params[:search].present?
       @application = Application.find(params[:id])
-      require "pry"; binding.pry
+      @pets = Pet.find_by_search_name(params[:search])
     else
       @application = Application.find(params[:id])
     end
