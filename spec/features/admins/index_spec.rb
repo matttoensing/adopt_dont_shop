@@ -35,7 +35,7 @@ RSpec.describe 'admins visiting shelter page' do
     visit '/admin/shelters'
 
     expect(page).to have_content("Shelter's with Pending Applications")
-    expect(shelter1.name).to appear_after("Shelter's with Pending Applications")
-    expect(shelter2.name).to appear_after("Shelter's with Pending Applications")
+    expect("Shelter's with Pending Applications").to appear_before("Shelter: #{shelter1.name}")
+    expect("Shelter's with Pending Applications").to appear_before("Shelter: #{shelter2.name}")
   end
 end
