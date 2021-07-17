@@ -42,11 +42,17 @@ RSpec.describe Shelter, type: :model do
       end
     end
 
-    describe '#find_pet_by_name' do
-      xit 'can find pets by a given name' do
-        expected = [@pet_2]
+    describe '#order_in_reverse' do
+      it 'orders the shelters in reverse alphabetical order' do
+        Shelter.destroy_all
 
-        expect(Shelter.find_pet_by_name('Clawdia')).to eq(expected)
+        shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+        shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
+        shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
+
+        expected = [shelter_2, shelter_3, shelter_1]
+
+        expect(Shelter.order_in_reverse).to eq(expected)
       end
     end
   end
