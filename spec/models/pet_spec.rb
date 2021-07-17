@@ -31,7 +31,11 @@ RSpec.describe Pet, type: :model do
 
     describe '#adoptable' do
       it 'returns adoptable pets' do
-        expect(Pet.adoptable).to eq([@pet_1, @pet_2])
+        Pet.destroy_all
+        pet_1 = @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
+        pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
+        pet_3 = @shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 3, adoptable: false)
+        expect(Pet.adoptable).to eq([pet_1, pet_2])
       end
     end
 
@@ -39,6 +43,11 @@ RSpec.describe Pet, type: :model do
       it 'returns pets with a given name ' do
         expect(Pet.find_by_search_name('Ann')).to eq([@pet_3])
         expect(Pet.find_by_search_name('Clawdia')).to eq([@pet_2])
+      end
+
+      it 'can return a pet with a partial name' do
+        expect(Pet.find_by_search_name('Pira')).to eq([@pet_1])
+        expect(Pet.find_by_search_name('Claw')).to eq([@pet_2])
       end
     end
   end
