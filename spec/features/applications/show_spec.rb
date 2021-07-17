@@ -19,7 +19,7 @@ RSpec.describe 'application show page'  do
     PetApplication.destroy_all
     Pet.destroy_all
     Application.destroy_all
-    
+
     shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
     application = create(:application)
     pet = create(:pet, age: 6, shelter_id: shelter.id)
@@ -66,6 +66,7 @@ RSpec.describe 'application show page'  do
     click_on "Adopt #{pet.name}"
 
     expect(current_path).to eq("/applications/#{application.id}")
+    expect(page).to have_content("Pets Applied For: #{pet.name}")
     expect(PetApplication.last.application_id).to eq(application.id)
     expect(PetApplication.last.pet_id).to eq(pet.id)
   end
