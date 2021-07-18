@@ -1,0 +1,15 @@
+<h1>Application Approval Page</h1>
+<h3><%= @application.name %></h3>
+<p><%= @application.street %></p>
+<p><%= @application.city %>, <%= @application.state %> <%= @application.zip_code %></p>
+<p><%= @application.description %></p>
+<p>Application Status: <%= @application.status %></p>
+
+<h3>Pets Applied For: </h3>
+<% @pets.each do |pet| %>
+  <p><%= pet.name %></p>
+  <p><%= pet.age %></p>
+  <p><%= pet.breed %></p>
+  <p><%= pet.adoptable %></p>
+  <%= button_to "Approve #{pet.name}" %>
+<% end  %>
