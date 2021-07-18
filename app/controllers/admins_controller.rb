@@ -9,8 +9,8 @@ class AdminsController < ApplicationController
     if params[:pet_id]
       @application = Application.find(params[:id])
       @application.change_status_approved
-      @pets = @application.pets
-      @pets.approve_pets(params[:pet_id])
+      @not_approved = @application.pets.approve_pets(params[:pet_id])
+      @approved_pets = Pet.find(params[:pet_id])
     else
       @application = Application.find(params[:id])
       @pets = @application.pets

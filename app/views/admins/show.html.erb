@@ -5,11 +5,35 @@
 <p><%= @application.description %></p>
 <p>Application Status: <%= @application.status %></p>
 
-<h3>Pets Applied For: </h3>
-<% @pets.each do |pet| %>
-  <p><%= pet.name %></p>
-  <p><%= pet.age %></p>
-  <p><%= pet.breed %></p>
-  <p><%= pet.adoptable %></p>
-  <%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post }%>
+<% if @pets %>
+  <h3>Pets Applied For: </h3>
+  <%= @pets.each do |pet| %>
+    <p><%= pet.name %></p>
+    <p><%= pet.age %></p>
+    <p><%= pet.breed %></p>
+    <p><%= pet.adoptable %></p>
+    <%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post }%>
+  <% end  %>
+<% end  %>
+
+<% if @not_approved %>
+  <h3>Pets Applied For: </h3>
+  <% @not_approved.each do |pet| %>
+    <p><%= pet.name %></p>
+    <p><%= pet.age %></p>
+    <p><%= pet.breed %></p>
+    <p><%= pet.adoptable %></p>
+    <%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post }%>
+  <% end  %>
+<% end  %>
+
+<% if @approved_pets %>
+<h3>Pets Not Approved Yet: </h3>
+  <% @pets.each do |pet| %>
+    <p><%= pet.name %></p>
+    <p><%= pet.age %></p>
+    <p><%= pet.breed %></p>
+    <p><%= pet.adoptable %></p>
+    <p><%= @application.status %></p>
+  <% end  %>
 <% end  %>
