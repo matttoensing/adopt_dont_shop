@@ -6,7 +6,14 @@ class AdminsController < ApplicationController
   end
 
   def show
-    @application = Application.find(params[:id])
-    @pets = @application.pets
+    if params[:pet_id]
+      @application = Application.find(params[:id])
+      @application.change_status_approved
+      @pets = @application.pets
+      @pets.approve_pets(params[:pet_id])
+    else
+      @application = Application.find(params[:id])
+      @pets = @application.pets
+    end
   end
 end
