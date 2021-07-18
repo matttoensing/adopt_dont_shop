@@ -33,7 +33,7 @@ RSpec.describe 'admins visiting shelter page' do
     petapp3 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id)
 
     visit '/admin/shelters'
-
+    save_and_open_page
     expect(page).to have_content("Shelter's with Pending Applications")
     expect("Shelter's with Pending Applications").to appear_before("Shelter: #{shelter1.name}")
     expect("Shelter's with Pending Applications").to appear_before("Shelter: #{shelter2.name}")

@@ -64,7 +64,7 @@ RSpec.describe 'application show page'  do
     fill_in "search", with: pet.name
     click_on 'Submit'
     click_on "Adopt #{pet.name}"
-
+    
     expect(current_path).to eq("/applications/#{application.id}")
     expect(page).to have_content("Pets Applied For: #{pet.name}")
     expect(page).to have_link("#{pet.name}")
