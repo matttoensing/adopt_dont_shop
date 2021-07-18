@@ -20,6 +20,11 @@
   <% if notice %>
   <%= render 'layouts/flash' %>
   <% end %>
+  <% flash.each do |type, msg| %>
+   <div>
+     <%= msg %>
+   </div>
+ <% end %>
   <div class="container">
     <br/>
     <%= yield %>
