@@ -50,6 +50,16 @@ RSpec.describe Pet, type: :model do
         expect(Pet.find_by_search_name('claw')).to eq([@pet_2])
       end
     end
+
+    describe '#approve_pets' do
+      it 'it will find all pets that have not been aproved on application' do
+        expected = [@pet_2, @pet_3]
+        expect(Pet.approve_pets(@pet_1.id)).to eq(expected)
+
+        expected2 = [@pet_1, @pet_2]
+        expect(Pet.approve_pets(@pet_3.id)).to eq(expected2)
+      end
+    end
   end
 
   describe 'instance methods' do

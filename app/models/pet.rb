@@ -19,9 +19,8 @@ class Pet < ApplicationRecord
   def self.find_by_search_name(search)
     Pet.where('lower(name) LIKE ?', "%#{search.downcase}%")
   end
-end
 
-# def self.search(search)
-#   return where("0=1") if search !~ /\w{4}/
-#   where("lower(title) LIKE lower(:term)", term: "%#{search}%")
-# end
+  def self.approve_pets(petid)
+    Pet.where.not('id = ?', petid)
+  end
+end
