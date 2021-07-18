@@ -27,7 +27,7 @@
     <p><%= pet.breed %></p>
     <p><%= pet.adoptable %></p>
     <%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post }%>
-    <%= button_to "Reject #{pet.name} Adoption Request", { :controller => 'admins', :action => "delete", :reject => @application.id, :pet_id => pet.id, :application_id => @application.id, :method => :delete } %>
+    <%= button_to "Reject #{pet.name} Adoption Request", { :controller => 'admins', :action => "delete", :reject => pet.id, :application_id => @application.id, :method => :delete } %>
   <% end  %>
 <% end  %>
 
@@ -45,4 +45,14 @@
     <p><%= @application_rejected.street %></p>
     <p><%= @application_rejected.city %>, <%= @application_rejected.state %> <%= @application_rejected.zip_code %></p>
     <p>Status: <%= @application_rejected.status %></p>
+<% end  %>
+
+<% if @pet_rejected %>
+<h3>Pets Not Approved: </h3>
+<%= @pet_rejected.each do |pet| %>
+    <p><%= pet.name %> <%= @application_rejected.status %></p>
+    <p><%= pet.age %></p>
+    <p><%= pet.breed %></p>
+    <p><%= pet.adoptable %></p>
+<% end  %>
 <% end  %>
