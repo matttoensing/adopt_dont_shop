@@ -28,12 +28,10 @@
 <% end  %>
 
 <% if @approved_pets %>
-<h3>Pets Not Approved Yet: </h3>
-  <% @pets.each do |pet| %>
-    <p><%= pet.name %></p>
-    <p><%= pet.age %></p>
-    <p><%= pet.breed %></p>
-    <p><%= pet.adoptable %></p>
+<h3>Pets Approved For: </h3>
+    <p><%= @approved_pets.name %></p>
+    <p><%= @approved_pets.age %></p>
+    <p><%= @approved_pets.breed %></p>
+    <p><%= @approved_pets.adoptable %></p>
     <p><%= @application.status %></p>
-  <% end  %>
 <% end  %>
