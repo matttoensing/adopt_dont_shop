@@ -53,7 +53,7 @@ RSpec.describe Pet, type: :model do
 
     describe '#approve_pets' do
       it 'it will find all pets that have not been aproved on application' do
-        expected = [@pet_2, @pet_3]
+        expected = [@pet_3, @pet_2]
         expect(Pet.approve_pets(@pet_1.id)).to eq(expected)
 
         expected2 = [@pet_1, @pet_2]
