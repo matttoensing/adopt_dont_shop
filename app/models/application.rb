@@ -14,4 +14,12 @@ class Application < ApplicationRecord
   def change_status_pending
     self.status = "Pending"
   end
+
+  def change_status_approved
+    self.status = "Approved"
+  end
+
+  def change_status_rejected
+    self.status = "Rejected"
+  end
 end

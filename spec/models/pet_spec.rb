@@ -50,6 +50,40 @@ RSpec.describe Pet, type: :model do
         expect(Pet.find_by_search_name('claw')).to eq([@pet_2])
       end
     end
+
+    describe '#approve_pets' do
+      it 'it will find all pets that have not been aproved on application' do
+        expected = [@pet_3, @pet_2]
+        expect(Pet.approve_pets(@pet_1.id)).to eq(expected)
+
+        expected2 = [@pet_1, @pet_2]
+        expect(Pet.approve_pets(@pet_3.id)).to eq(expected2)
+      end
+    end
+
+    describe '#find_by_application_id' do
+      it 'can find a pet with a given application id' do
+        shelter1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
+        shelter2 = Shelter.create!(name: 'Westminster shelter', city: 'Westminster, CO', foster_program: true, rank: 7)
+        application1 = create(:application, status: "Pending")
+        application2 = create(:application, status: "Pending")
+        application3 = create(:application, status: "Pending")
+        pet1 = create(:pet, shelter_id: shelter1.id)
+        pet2 = create(:pet, shelter_id: shelter2.id)
+        pet3 = create(:pet, shelter_id: shelter2.id)
+        petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id)
+        petapp2 = PetApplication.create!(application_id: application1.id, pet_id: pet2.id)
+        petapp3 = PetApplication.create!(application_id: application3.id, pet_id: pet3.id)
+
+        expected = [pet1]
+
+        expect(Pet.find_by_application_id(application1.id)).to eq(expected)
+
+        expected2 = [pet3]
+
+        expect(Pet.find_by_application_id(application3.id)).to eq(expected2)
+      end
+    end
   end
 
   describe 'instance methods' do
