@@ -1,9 +1,11 @@
 <h1>Application Approval Page</h1>
+<% if @application %>
 <h3><%= @application.name %></h3>
 <p><%= @application.street %></p>
 <p><%= @application.city %>, <%= @application.state %> <%= @application.zip_code %></p>
 <p><%= @application.description %></p>
 <p>Application Status: <%= @application.status %></p>
+<% end %>
 
 <% if @pets %>
   <h3>Pets Applied For: </h3>

@@ -17,7 +17,6 @@ class AdminsController < ApplicationController
       @application_rejected = Application.find(params[:id])
       @application_rejected.change_status_rejected
       # @pet_rejected = Pet.find(params[:pet_id])
-      redirect_to "/admin/applications/#{@application_rejected.id}"
     else
       @application = Application.find(params[:id])
       @pets = @application.pets
