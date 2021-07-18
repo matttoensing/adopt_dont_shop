@@ -23,4 +23,8 @@ class Pet < ApplicationRecord
   def self.approve_pets(petid)
     Pet.includes(:applications).references(:applications).where.not('pets.id = ?', petid)
   end
+
+  def self.find_by_application_id(appid)
+    Pet.includes(:pet_applications).references(:applications).where('application_id = ?', appid)
+  end
 end
