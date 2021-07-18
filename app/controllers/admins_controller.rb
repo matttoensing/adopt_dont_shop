@@ -13,7 +13,7 @@ class AdminsController < ApplicationController
       @not_approved = @not_approved.approve_pets(params[:pet_id])
       @approved_pets = Pet.find(params[:pet_id])
     elsif params[:reject]
-      require "pry"; binding.pry
+
       @application_rejected = Application.find(params[:id])
       @application_rejected.change_status_rejected
       @pet_rejected = Pet.find_by_application_id(params[:id])

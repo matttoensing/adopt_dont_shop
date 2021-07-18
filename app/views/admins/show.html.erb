@@ -15,7 +15,7 @@
     <p><%= pet.breed %></p>
     <p><%= pet.adoptable %></p>
     <%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post }%>
-    <%= button_to "Reject #{pet.name} Adoption Request", "/admin/applications/#{@application.id}",  { :controller => 'admins', :action => "delete", :reject => @application.id, :pet_id => pet.id, :application_id => @application.id, :method => :delete }  %>
+    <%= button_to "Reject #{pet.name} Adoption Request", "/admin/applications/#{@application.id}", params: { :controller => 'admins', :action => "delete", :reject => pet.id, :application_id => @application.id, :method => :delete }  %>
   <% end  %>
 <% end  %>
 
