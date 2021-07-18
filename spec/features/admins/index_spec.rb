@@ -29,8 +29,8 @@ RSpec.describe 'admins visiting shelter page' do
     pet2 = create(:pet, shelter_id: shelter2.id)
     pet3 = create(:pet, shelter_id: shelter2.id)
     petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id)
-    petapp1 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id)
-    petapp1 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id)
+    petapp2 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id)
+    petapp3 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id)
 
     visit '/admin/shelters'
 
