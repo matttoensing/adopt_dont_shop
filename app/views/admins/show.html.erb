@@ -18,8 +18,8 @@
 <% end  %>
 
 <% if @not_approved %>
-  <h3>Pets Applied For: </h3>
   <% @not_approved.each do |pet| %>
+  <h3>Pets Applied For: </h3>
     <p><%= pet.name %></p>
     <p><%= pet.age %></p>
     <p><%= pet.breed %></p>
