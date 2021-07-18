@@ -13,7 +13,7 @@
     <p><%= pet.breed %></p>
     <p><%= pet.adoptable %></p>
     <%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post }%>
-    <%= button_to "Reject #{pet.name} Adoption Request", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post }%>
+    <%= button_to "Reject #{pet.name} Adoption Request" %>
   <% end  %>
 <% end  %>
 
