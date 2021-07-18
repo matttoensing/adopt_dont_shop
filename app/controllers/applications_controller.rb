@@ -18,7 +18,6 @@ class ApplicationsController < ApplicationController
 
     if params[:description]
       @application = Application.find(params[:id])
-      @application.change_status_pending
       @pets_for_app = @application.pets
     end
   end
@@ -37,6 +36,13 @@ class ApplicationsController < ApplicationController
       flash[:errors] = @application.errors.full_messages
       render 'new'
     end
+  end
+
+  def update
+    @application = Application.find(params[:id])
+    @application.update({description: params[:description], status: "Pending"})
+    @pets_for_app = @application.pets
+    redirect_to(controller: 'applications', action: 'show', id: @application.id, description: "true")
   end
 
   private
