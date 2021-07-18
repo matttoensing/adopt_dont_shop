@@ -27,5 +27,16 @@ RSpec.describe Application do
         expect(application.status).to eq("Pending")
       end
     end
+
+    describe '#change_status_approved' do
+      it 'can change application status from pending to approved' do
+        shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
+        application = create(:application)
+
+        application.change_status_approved
+
+        expect(application.status).to eq("Approved")
+      end
+    end
   end
 end
