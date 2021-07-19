@@ -1,21 +1,41 @@
-<h1>Application Approval Page</h1>
+<h3>Application Approval Page</h3>
 <% if @application %>
-<h3><%= @application.name %></h3>
-<p><%= @application.street %></p>
-<p><%= @application.city %>, <%= @application.state %> <%= @application.zip_code %></p>
-<p><%= @application.description %></p>
-<p>Application Status: <%= @application.status %></p>
+<div class="card bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-header">Applicant Name: <%= @application.name %></div>
+  <div class="card-body">
+    <h6 class="card-title">Address: <%= @application.street %></h6>
+    <h6 class="card-title"><%= @application.city %>, <%= @application.state %> <%= @application.zip_code %></h6>
+    <h6 class="card-title">Application Status: <%= @application.status %></h6>
+    <p class="card-text"><%= @application.description %></p>
+  </div>
+  </div>
 <% end %>
 
 <% if @pets %>
   <h3>Pets Applied For: </h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Breed</th>
+        <th scope="col">Adoptable</th>
+        <th scope="col">Approve</th>
+        <th scope="col">Reject</th>
+      </tr>
+    </thead>
   <% @pets.each do |pet| %>
-    <p><%= pet.name %></p>
-    <p><%= pet.age %></p>
-    <p><%= pet.breed %></p>
-    <p><%= pet.adoptable %></p>
-    <%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post }%>
-    <%= button_to "Reject #{pet.name} Adoption Request", "/admin/applications/#{@application.id}", params: { :controller => 'admins', :action => "delete", :reject => pet.id, :application_id => @application.id, :method => :delete }  %>
+  <tbody>
+    <tr>
+      <td><%= pet.name %></td>
+      <td><%= pet.age %></td>
+      <td><%= pet.breed %></td>
+      <td><%= pet.adoptable %></td>
+      <td><%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post }, class: 'btn btn-success' %></td>
+      <td><%= button_to "Reject #{pet.name} Adoption Request", "/admin/applications/#{@application.id}", params: { :controller => 'admins', :action => "delete", :reject => pet.id, :application_id => @application.id, :method => :delete }, class: 'btn btn-danger'  %></td>
+    </tr>
+  </tbody>
+</table>
   <% end  %>
 <% end  %>
 
