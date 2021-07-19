@@ -114,4 +114,23 @@ RSpec.describe 'admin application show page' do
       expect(page).to have_button("Reject #{pet2.name} Adoption Request")
     end
   end
+
+  describe 'pets adoptable status' do
+    it 'pet status changes to false on pet show page after clicking approval button' do
+      shelter = Shelter.create!(name: 'Aurora Shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
+      application = create(:application, status: "Pending")
+      pet1 = create(:pet, shelter_id: shelter.id)
+      pet2 = create(:pet, shelter_id: shelter.id)
+      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id)
+      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id)
+
+      visit "/admin/applications/#{application.id}"
+
+      click_on "Approve #{pet1.name}"
+
+      visit "/pets/#{pet1.id}"
+
+      expect(page).to have_content("Pet Adoptable: false")
+    end
+  end
 end
