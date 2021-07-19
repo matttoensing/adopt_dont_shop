@@ -1,20 +1,37 @@
 <h1>All pets</h1>
-
+<br>
 <%= form_with url: "/pets", method: :get, local: true do |f| %>
   <%= f.label :search %>
   <%= f.text_field :search %>
   <%= f.submit "Search" %>
 <% end %>
+<br>
 
-
-<% @pets.each do |pet| %>
-  <h3><%= pet.name %></h3>
-  <p>Age: <%= pet.age %></p>
-  <p>Breed: <%= pet.breed %></p>
-  <p>Adoptable: </p>
-  <p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p>
-  <%= link_to "Edit #{pet.name}", "/pets/#{pet.id}/edit" %>
-  <%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete %>
-<% end %>
-
-<%= link_to "Start an Application", '/applications/new' %>
+<table class="table table-light table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Pet Name</th>
+      <th scope="col">Pet Breed</th>
+      <th scope="col">Pet Age</th>
+      <th scope="col">Pet Adoptable</th>
+      <th scope="col">Shelter</th>
+      <th scope="col">Edit Pet Info</th>
+      <th scope="col">Delete Pet From Page</th>
+    </tr>
+  </thead>
+  <% @pets.each do |pet| %>
+  <tbody>
+    <tr>
+      <td><%= pet.name %></td>
+      <td><%= pet.breed %></td>
+      <td><%= pet.age %></td>
+      <td><%= pet.adoptable %></td>
+      <td><%= pet.shelter_name %></td>
+      <td><%= link_to "Edit #{pet.name}", "/pets/#{pet.id}/edit", class: "btn btn-primary" %></td>
+      <td><%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete, class: "btn btn-danger" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Start an Application", '/applications/new', class: "btn btn-success" %>
+<br><br>
