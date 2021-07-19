@@ -115,7 +115,6 @@ RSpec.describe 'application show page'  do
     expect(page).to have_content("Pets Applied For: #{pet.name}")
     expect(page).to_not have_button('Submit')
     expect(page).to_not have_content("Add a Pet to this Application")
-    expect(application.description).to eq("I Love Animals!")
   end
 
   it 'will not desplay a text field to enter description if no pets are added to application' do
