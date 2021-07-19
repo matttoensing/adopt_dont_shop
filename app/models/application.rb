@@ -22,8 +22,4 @@ class Application < ApplicationRecord
   def change_status_rejected
     self.status = "Rejected"
   end
-
-  def pets_not_approved(petid)
-    self.pets.where.not('pet_id = ?', petid)
-  end
 end
