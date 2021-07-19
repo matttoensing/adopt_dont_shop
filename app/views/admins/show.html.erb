@@ -53,17 +53,6 @@
 <% end  %>
 <% end  %>
 
-<% if @approved_pets %>
-<h3>Pets Approved For: </h3>
-<% @approved_pets.each do |pet| %>
-    <p><%= pet.name %></p>
-    <p><%= pet.age %></p>
-    <p><%= pet.breed %></p>
-    <p><%= pet.adoptable %></p>
-    <p><%= @application.status %></p>
-    <% end  %>
-<% end  %>
-
 <% if @all_approved_pets %>
 <h3>Pets Approved For: </h3>
 <% @all_approved_pets.each do |pet| %>

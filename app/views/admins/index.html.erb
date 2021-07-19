@@ -31,8 +31,8 @@
 <% @shelters_with_pends.each do |shelter| %>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title"><%= shelter.name %></h5>
-<a href="#" class="card-link"><%= link_to "View", "/shelters/#{shelter.id}", class: 'btn btn-primary' %></a>
+    <h5 class="card-title">Shelter: <%= shelter.name %></h5>
+<a href="#" class="card-link"><%= link_to "View", "/shelters/#{shelter.id}", class: 'btn btn-primary' %><br></a>
 </div>
 </div>
 <% end %>
