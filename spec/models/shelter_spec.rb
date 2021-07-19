@@ -59,7 +59,7 @@ RSpec.describe Shelter, type: :model do
     describe '#shelters_with_pending_apps' do
       it 'returns all shelters with pending applications' do
         Shelter.destroy_all
-        
+
         shelter1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
         shelter2 = Shelter.create!(name: 'Westminster shelter', city: 'Westminster, CO', foster_program: true, rank: 7)
         shelter3 = Shelter.create!(name: 'Boulder shelter', city: 'Boulder, CO', foster_program: true, rank: 9)
