@@ -5,13 +5,19 @@
 <p>Application Status: <%= @application.status %></p>
 
 <% if @pet_on_app %>
-  <%= @pet_on_app.each do |pet| %>
+  <% @pet_on_app.each do |pet| %>
   <p>Pets Applied For: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
   <% end %>
 <% end %>
 
 <% if @pets_for_app %>
-  <%= @pets_for_app.each do |pet| %>
+  <% @pets_for_app.each do |pet| %>
+  <p>Pets Applied For: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
+  <% end %>
+<% end %>
+
+<% if @applied_for %>
+  <% @applied_for.each do |pet| %>
   <p>Pets Applied For: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
   <% end %>
 <% end %>
@@ -34,10 +40,8 @@
 <% end %>
 <% end %>
 
-
-
 <% if @pets %>
-  <%= @pets.each do |pet| %>
+  <% @pets.each do |pet| %>
     <br><h2>Name: <%= pet.name %></h2><br>
     <p>Age: <%= pet.age %></p>
     <p>Breed: <%= pet.breed %></p>

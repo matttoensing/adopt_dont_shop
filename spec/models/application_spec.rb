@@ -50,4 +50,36 @@ RSpec.describe Application do
       end
     end
   end
+
+  describe 'class methods' do
+    # describe '#pets_not_approved' do
+    #   it 'can find all pets not on application that are not the given pet id' do
+    #     shelter1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
+    #     application = create(:application, status: "Approved")
+    #     pet1 = create(:pet, adoptable: false, shelter_id: shelter1.id)
+    #     pet2 = create(:pet, shelter_id: shelter1.id)
+    #     pet3 = create(:pet, shelter_id: shelter1.id)
+    #     petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id)
+    #     petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id)
+    #     petapp3 = PetApplication.create!(application_id: application.id, pet_id: pet3.id)
+    #
+    #     expected = [pet2, pet3]
+    #
+    #     expect(application.pets_not_approved(pet1.id)).to eq(expected)
+    #
+    #     shelter2 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
+    #     application2 = create(:application, status: "Approved")
+    #     pet4 = create(:pet, adoptable: false, shelter_id: shelter1.id)
+    #     pet5 = create(:pet, adoptable: false, shelter_id: shelter1.id)
+    #     pet6 = create(:pet, shelter_id: shelter1.id)
+    #     petapp4 = PetApplication.create!(application_id: application.id, pet_id: pet1.id)
+    #     petapp5 = PetApplication.create!(application_id: application.id, pet_id: pet2.id)
+    #     petapp6 = PetApplication.create!(application_id: application.id, pet_id: pet3.id)
+    #
+    #     expected2 = [pet3]
+    #
+    #     expect(application.pets_not_approved(pet3.id)).to eq(expected2)
+    #   end
+    # end
+  end
 end
