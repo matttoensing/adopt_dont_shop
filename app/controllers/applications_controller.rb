@@ -7,6 +7,7 @@ class ApplicationsController < ApplicationController
     if params[:search].present?
       @application = Application.find(params[:id])
       @pets = Pet.find_by_search_name(params[:search])
+      @applied_for = @application.pets if !@application.pets.nil?
     else
       @application = Application.find(params[:id])
     end
