@@ -34,13 +34,13 @@
       <td><%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post }, class: 'btn btn-success' %></td>
       <td><%= button_to "Reject #{pet.name} Adoption Request", "/admin/applications/#{@application.id}", params: { :controller => 'admins', :action => "delete", :reject => pet.id, :application_id => @application.id, :method => :delete }, class: 'btn btn-danger'  %></td>
     </tr>
+    <% end  %>
   </tbody>
 </table>
-  <% end  %>
 <% end  %>
 
-<% if @not_approved %>
-  <% @not_approved.each do |pet| %>
+<% if @not_approved || @pets_rejected %>
+  <% @application.pets.each do |pet| %>
   <% if pet.adoptable == true %>
   <h3>Pets Applied For: </h3>
     <p><%= pet.name %></p>
@@ -78,5 +78,6 @@
     <p><%= pet.age %></p>
     <p><%= pet.breed %></p>
     <p><%= pet.adoptable %></p>
+
     <% end  %>
 <% end  %>

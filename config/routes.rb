@@ -23,11 +23,12 @@ Rails.application.routes.draw do
   patch '/veterinary_offices/:id', to: 'veterinary_offices#update'
   delete '/veterinary_offices/:id', to: 'veterinary_offices#destroy'
 
-  get '/veterinarians', to: 'veterinarians#index'
-  get '/veterinarians/:id', to: 'veterinarians#show'
-  get '/veterinarians/:id/edit', to: 'veterinarians#edit'
-  patch '/veterinarians/:id', to: 'veterinarians#update'
-  delete '/veterinarians/:id', to: 'veterinarians#destroy'
+  resources :veterinarians
+  # get '/veterinarians', to: 'veterinarians#index'
+  # get '/veterinarians/:id', to: 'veterinarians#show'
+  # get '/veterinarians/:id/edit', to: 'veterinarians#edit'
+  # patch '/veterinarians/:id', to: 'veterinarians#update'
+  # delete '/veterinarians/:id', to: 'veterinarians#destroy'
 
   get '/shelters/:shelter_id/pets', to: 'shelters#pets'
   get '/shelters/:shelter_id/pets/new', to: 'pets#new'
