@@ -34,7 +34,7 @@ RSpec.describe 'application show page'  do
       fill_in "search", with: pet.name
       click_on 'Submit'
 
-      expect(page).to have_content("Name: #{pet.name}")
+      expect(page).to have_content("#{pet.name}")
       expect(page).to have_content("Breed: #{pet.breed}")
       expect(page).to have_content("Age: #{pet.age}")
       expect(page).to have_content("Adoptable: #{pet.adoptable}")

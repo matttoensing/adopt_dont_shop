@@ -3,8 +3,13 @@
     <h5 class="card-title"><%= @shelter.name %></h5>
     <p class="card-text">Rank: <%= @shelter.rank %></p>
     <p class="card-text">Rank: City: <%= @shelter.city %></p>
-    <p class="card-text pet-count">Pets at <%= @shelter.name %>: <%= @shelter.pet_count %></p>
     <a href="#" class="card-link"><%= link_to "All pets at #{@shelter.name}", "/shelters/#{@shelter.id}/pets", class: 'btn btn-primary' %></a><br/>
+    <a href="#" class="card-link"><%= link_to "Edit #{@shelter.name}", "/shelters/#{@shelter.id}/edit", method: :delete, class: 'btn btn-danger' %></a>
     <a href="#" class="card-link"><%= link_to "Delete #{@shelter.name}", "/shelters/#{@shelter.id}", method: :delete, class: 'btn btn-danger' %></a>
   </div>
 </div>
+
+<h3>Statistics</h3>
+<p>Number of Pets: <%= @shelter.pet_count %></p>
+<p>Average Pet Age: <%= @shelter.average_pet_age %></p>
+<p>Number of Adoptable Pets: <%= @shelter.adoptable_pets %></p>

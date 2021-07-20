@@ -57,7 +57,7 @@ RSpec.describe Shelter, type: :model do
     end
 
     describe '#shelters_with_pending_apps' do
-      it 'returns all shelters with pending applications' do
+      it 'returns all shelters with pending applications in alphabetical order' do
         Shelter.destroy_all
 
         shelter1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
@@ -105,6 +105,18 @@ RSpec.describe Shelter, type: :model do
     describe '.pet_count' do
       it 'returns the number of pets at the given shelter' do
         expect(@shelter_1.pet_count).to eq(3)
+      end
+    end
+
+    describe '#average_pet_age' do
+      it 'returns the average age of all pets belonging to a shelter' do
+        shelter = Shelter.create!(name: 'Boulder Valley Shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
+        pet1 = create(:pet, age: 3, shelter_id: shelter.id)
+        pet2 = create(:pet, age: 2, shelter_id: shelter.id)
+        pet3 = create(:pet, age: 3, shelter_id: shelter.id)
+        pet4 = create(:pet, age: 4, shelter_id: shelter.id)
+
+        expect(shelter.average_pet_age).to eq(3)
       end
     end
   end

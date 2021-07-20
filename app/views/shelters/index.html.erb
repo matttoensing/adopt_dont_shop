@@ -1,5 +1,5 @@
 <h1>All Shelters</h1>
-
+<br>
 <%= link_to "Sort by number of pets", "/shelters?sort=pet_count" %>
 
 <%= form_with url: "/shelters", method: :get, local: true do |f| %>
@@ -8,11 +8,35 @@
   <%= f.submit "Search" %>
 <% end %>
 
-<% @shelters.each do |shelter| %>
-  <div id="shelter-<%= shelter.id %>">
-    <h3><%= shelter.name %></h3>
-    <p>Created at: <%= shelter.created_at %></p>
-    <%= link_to "Update #{shelter.name}", "/shelters/#{shelter.id}/edit" %>
-    <%= link_to "Delete #{shelter.name}", "/shelters/#{shelter.id}", method: :delete %>
-  </div>
-<% end %>
+<br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Created at</th>
+      <th scope="col">City</th>
+      <th scope="col">Rank</th>
+      <th scope="col">Number of Pets</th>
+      <th scope="col">View</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <% @shelters.each do |shelter| %>
+    <div id="shelter-<%= shelter.id %>">
+  <tbody>
+    <tr>
+      <td><%= shelter.name %></td>
+      <td>Created at: <%= shelter.created_at %></td>
+      <td><%= shelter.city %></td>
+      <td><%= shelter.rank %></td>
+      <td><%= shelter.pet_count %></td>
+      <td><%= link_to "View #{shelter.name}", "/shelters/#{shelter.id}", class: 'btn btn-primary' %></td>
+      <td><%= link_to "Update #{shelter.name}", "/shelters/#{shelter.id}/edit", class: 'btn btn-warning' %></td>
+      <td><%= link_to "Delete #{shelter.name}", "/shelters/#{shelter.id}", method: :delete, class: 'btn btn-danger' %></td>
+    </tr>
+    <tr>
+      <% end %>
+  </tbody>
+</table>
+</div>
