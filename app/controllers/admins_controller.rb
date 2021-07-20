@@ -30,6 +30,7 @@ class AdminsController < ApplicationController
     @application = Application.find(params[:id])
     @application.update!(status: "Rejected")
 
-    redirect_to(controller: 'admins', action: 'show', id: @application.id, reject: "true")
+    render '/admins/_reject'
+    # redirect_to(controller: 'admins', action: 'show', id: @application.id, reject: "true")
   end
 end
