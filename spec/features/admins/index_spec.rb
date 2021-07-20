@@ -31,9 +31,9 @@ RSpec.describe 'admins visiting shelter page' do
       pet1 = create(:pet, shelter_id: shelter1.id)
       pet2 = create(:pet, shelter_id: shelter2.id)
       pet3 = create(:pet, shelter_id: shelter2.id)
-      petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id)
-      petapp2 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id)
-      petapp3 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id)
+      petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id, status: "Pending")
+      petapp2 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id, status: "Pending")
+      petapp3 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id, status: "Pending")
 
       visit '/admin/shelters'
 
@@ -57,10 +57,10 @@ RSpec.describe 'admins visiting shelter page' do
       pet2 = create(:pet, shelter_id: shelter2.id)
       pet3 = create(:pet, shelter_id: shelter2.id)
       pet4 = create(:pet, shelter_id: shelter3.id)
-      petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id)
-      petapp2 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id)
-      petapp3 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id)
-      petapp4 = PetApplication.create!(application_id: application6.id, pet_id: pet4.id)
+      petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id, status: "Pending")
+      petapp2 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id, status: "Pending")
+      petapp3 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id, status: "Pending")
+      petapp4 = PetApplication.create!(application_id: application6.id, pet_id: pet4.id, status: "Pending")
 
       visit '/admin/shelters'
 
