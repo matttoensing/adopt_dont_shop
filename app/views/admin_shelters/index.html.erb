@@ -1,0 +1,36 @@
+<h1>Shelters</h1>
+
+<table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Shelter Name</th>
+      <th scope="col">Location</th>
+      <th scope="col">Foster Program</th>
+      <th scope="col">Rank</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+<% @shelters.each do |shelter| %>
+  <tbody>
+    <tr>
+      <td><%= link_to "#{shelter.name}", "/admin/shelters/#{shelter.id}", class: 'btn btn-primary' %></td>
+      <td><%= shelter.city %></td>
+      <td><%= shelter.foster_program %></td>
+      <td><%= shelter.rank %></td>
+      <td><%= link_to "Edit", "/shelters/#{shelter.id}/edit", class: 'btn btn-warning' %></td>
+      <td><%= link_to "Delete", "/shelters", class: 'btn btn-danger' %></td>
+    </tr>
+    <% end  %>
+  </tbody>
+</table>
+
+<h3>Shelter's with Pending Applications</h3><br>
+<% @shelters_with_pends.order_by_name.each do |shelter| %>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Shelter: <%= shelter.name %></h5>
+<a href="#" class="card-link"><%= link_to "View", "/shelters/#{shelter.id}", class: 'btn btn-primary' %><br></a>
+</div>
+</div>
+<% end %>
