@@ -31,26 +31,17 @@
       <td><%= pet.adoptable %></td>
       <% if pet.adoptable == true %>
       <td><%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "approve", :pet_id => pet.id, :application_id => @application.id, :method => :post }, class: 'btn btn-success' %></td>
-      <td><%= button_to "Reject #{pet.name} Adoption Request", "/admin/applications/#{@application.id}", params: { :controller => 'admins', :action => "delete", :reject => pet.id, :application_id => @application.id, :method => :delete }, class: 'btn btn-danger'  %></td>
+      <td><%= button_to "Reject #{pet.name} Adoption Request", params: { :controller => 'admins', :action => "reject", :reject => pet.id, :application_id => @application.id, :method => :delete }, class: 'btn btn-danger'  %></td>
+      <% else %>
+      <td>Approved</td>
+      <td>Approved</td>
+      <% end  %>
     </tr>
     <% end  %>
     <% end  %>
   </tbody>
 </table>
-<% else %>
-<% render 'admins/reject' %>
-<% end  %>
 
-<% if @not_approved || @pets_rejected %>
-  <% @application.pets.each do |pet| %>
-  <% if pet.adoptable == true %>
-  <h3>Pets Applied For: </h3>
-    <p><%= pet.name %></p>
-    <p><%= pet.age %></p>
-    <p><%= pet.breed %></p>
-    <p><%= pet.adoptable %></p>
-    <%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post, :another_pet => true }%>
-    <%= button_to "Reject #{pet.name} Adoption Request", { :controller => 'admins', :action => "delete", :reject => pet.id, :application_id => @application.id, :method => :delete } %>
-  <% end  %>
-  <% end  %>
+<% if @application_rejected %>
+  <% render 'reject' %>
 <% end  %>

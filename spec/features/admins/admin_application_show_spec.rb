@@ -77,7 +77,7 @@ RSpec.describe 'admin application show page' do
       visit "/admin/applications/#{application.id}"
 
       click_on "Reject #{pet1.name} Adoption Request"
-
+      
       expect(page).to_not have_button("Reject #{pet1.name} Adoption Request")
       expect(page).to have_content("Status: Rejected")
       expect(page).to have_content("#{pet1.name} Rejected")

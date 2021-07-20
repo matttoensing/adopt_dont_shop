@@ -11,11 +11,6 @@ class AdminsController < ApplicationController
     if params[:pet_id]
       @all_approved_pets = @application.pets.approved
       @not_approved = @application.pets.not_approved(params[:pet_id])
-      require "pry"; binding.pry
-      # @all_approved_pets = @application.pets
-      # @all_approved_pets = @all_approved_pets.approved
-      # @not_approved = @application.pets
-      # @not_approved.not_approved(params[:pet_id])
     else params[:reject]
       @application_rejected = Application.find(params[:id])
       @pet_rejected = Pet.find_by_application_id(params[:id])
@@ -28,10 +23,11 @@ class AdminsController < ApplicationController
     @pet = Pet.find(params[:pet_id])
     @pet.update!(adoptable: false)
 
-    redirect_to(controller: 'admins', action: 'show', id: @application.id, reject: "true")
+    redirect_to(controller: 'admins', action: 'show', id: @application.id, pet_id: @pet.id)
   end
 
   def reject
+    require "pry"; binding.pry
     @application = Application.find(params[:id])
     @application.update!(status: "Rejected")
 

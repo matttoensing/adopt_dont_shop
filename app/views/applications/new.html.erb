@@ -13,17 +13,11 @@
       </div>
     <% end %>
     <br>
-  <label for="name"><%= label_tag "Name" %><br/></label>
-  <p><%= text_field_tag :name %></p>
-  <label for="steet"><%= label_tag  :street %><br/></label><br />
-  <p><%= text_field_tag  :street %></p>
-<label for="city"><%= label_tag "City" %><br/></label><br />
-  <p><%= text_field_tag  :city %></p>
-  <label for="state"><%= label_tag "State" %><br/></label><br />
-<p><%= text_field_tag  :state %></p>
-<label for="state"><%= label_tag "Zip Code" %><br/></label><br />
-<p><%= text_field_tag  :zip_code %></p>
-<label for="state"><%= label_tag "Description" %><br/></label><br />
-<p><%= text_field_tag  :description %></p>
+  <p><%= text_field_tag :name, nil, placeholder: "Your Full Name" %></p>
+  <p><%= text_field_tag  :street, nil, placeholder: "Street" %></p>
+  <p><%= text_field_tag  :city, nil, placeholder: "City" %></p>
+<p><%= text_field_tag  :state, nil, placeholder: "State" %></p>
+<p><%= text_field_tag  :zip_code, nil, placeholder: "Zip Code" %></p>
+<p><%= text_field_tag  :description, nil, placeholder: "Brief Description About Yourself" %></p>
 <%= submit_tag("Create Application", method: :post, class: "btn btn-primary") %><br><br>
 <% end %>
