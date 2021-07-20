@@ -46,8 +46,8 @@ Rails.application.routes.draw do
 
   get '/admin/shelters', to: 'admins#index'
   get '/admin/applications/:id', to: 'admins#show'
-  post '/admin/applications/:id', to: 'admins#show'
-  delete '/admin/applications/:id', to: 'admins#delete'
+  post '/admin/applications/:id', to: 'admins#approve'
+  delete '/admin/applications/:id', to: 'admins#reject'
 
   get '/admin/shelters/:id', to: 'admin_shelters#show'
 end

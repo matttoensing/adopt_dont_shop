@@ -1,5 +1,4 @@
 <h3>Application Approval Page</h3>
-<% if @application %>
 <div class="card bg-light mb-3" style="max-width: 18rem;">
   <div class="card-header">Applicant Name: <%= @application.name %></div>
   <div class="card-body">
@@ -9,9 +8,7 @@
     <p class="card-text"><%= @application.description %></p>
   </div>
   </div>
-<% end %>
 
-<% if @pets %>
   <h3>Pets Applied For: </h3>
   <table class="table table-striped">
     <thead>
@@ -24,19 +21,24 @@
         <th scope="col">Reject</th>
       </tr>
     </thead>
-  <% @pets.each do |pet| %>
+  <% if @pets %>
+  <% @application.pets.each do |pet| %>
   <tbody>
     <tr>
       <td><%= pet.name %></td>
       <td><%= pet.age %></td>
       <td><%= pet.breed %></td>
       <td><%= pet.adoptable %></td>
-      <td><%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post }, class: 'btn btn-success' %></td>
+      <% if pet.adoptable == true %>
+      <td><%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "approve", :pet_id => pet.id, :application_id => @application.id, :method => :post }, class: 'btn btn-success' %></td>
       <td><%= button_to "Reject #{pet.name} Adoption Request", "/admin/applications/#{@application.id}", params: { :controller => 'admins', :action => "delete", :reject => pet.id, :application_id => @application.id, :method => :delete }, class: 'btn btn-danger'  %></td>
     </tr>
     <% end  %>
+    <% end  %>
   </tbody>
 </table>
+<% else %>
+<% render 'admins/reject' %>
 <% end  %>
 
 <% if @not_approved || @pets_rejected %>
@@ -50,34 +52,5 @@
     <%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "show", :pet_id => pet.id, :application_id => @application.id, :method => :post, :another_pet => true }%>
     <%= button_to "Reject #{pet.name} Adoption Request", { :controller => 'admins', :action => "delete", :reject => pet.id, :application_id => @application.id, :method => :delete } %>
   <% end  %>
-<% end  %>
-<% end  %>
-
-<% if @all_approved_pets %>
-<h3>Pets Approved For: </h3>
-<% @all_approved_pets.each do |pet| %>
-    <p><%= pet.name %></p>
-    <p><%= pet.age %></p>
-    <p><%= pet.breed %></p>
-    <p><%= pet.adoptable %></p>
-    <p><%= @application.status %></p>
-    <% end  %>
-<% end  %>
-
-<% if @application_rejected %>
-    <p><%= @application_rejected.name %></p>
-    <p><%= @application_rejected.street %></p>
-    <p><%= @application_rejected.city %>, <%= @application_rejected.state %> <%= @application_rejected.zip_code %></p>
-    <p>Status: <%= @application_rejected.status %></p>
-<% end  %>
-
-<% if @pet_rejected %>
-<h3>Pets Not Approved: </h3>
-<% @pet_rejected.each do |pet| %>
-    <p><%= pet.name %> <%= @application_rejected.status %></p>
-    <p><%= pet.age %></p>
-    <p><%= pet.breed %></p>
-    <p><%= pet.adoptable %></p>
-
-    <% end  %>
+  <% end  %>
 <% end  %>
