@@ -57,7 +57,7 @@ RSpec.describe Shelter, type: :model do
     end
 
     describe '#shelters_with_pending_apps' do
-      it 'returns all shelters with pending applications' do
+      it 'returns all shelters with pending applications in alphabetical order' do
         Shelter.destroy_all
 
         shelter1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
@@ -107,5 +107,11 @@ RSpec.describe Shelter, type: :model do
         expect(@shelter_1.pet_count).to eq(3)
       end
     end
+
+    # describe '#full_address' do
+    #   it 'can display the full address of the ' do
+    #
+    #   end
+    # end
   end
 end
