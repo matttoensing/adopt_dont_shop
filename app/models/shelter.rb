@@ -32,6 +32,10 @@ class Shelter < ApplicationRecord
     adoptable_pets.where('age >= ?', age_filter)
   end
 
+  def average_pet_age
+    self.pets.average(:age).to_i
+  end
+
   def self.order_in_reverse
     Shelter.find_by_sql("SELECT * FROM shelters ORDER BY shelters.name desc")
   end

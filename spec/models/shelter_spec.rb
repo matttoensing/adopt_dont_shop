@@ -108,10 +108,16 @@ RSpec.describe Shelter, type: :model do
       end
     end
 
-    # describe '#full_address' do
-    #   it 'can display the full address of the ' do
-    #
-    #   end
-    # end
+    describe '#average_pet_age' do
+      it 'returns the average age of all pets belonging to a shelter' do
+        shelter = Shelter.create!(name: 'Boulder Valley Shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
+        pet1 = create(:pet, age: 3, shelter_id: shelter.id)
+        pet2 = create(:pet, age: 2, shelter_id: shelter.id)
+        pet3 = create(:pet, age: 3, shelter_id: shelter.id)
+        pet4 = create(:pet, age: 4, shelter_id: shelter.id)
+
+        expect(shelter.average_pet_age).to eq(3)
+      end
+    end
   end
 end
