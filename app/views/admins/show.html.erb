@@ -21,7 +21,7 @@
         <th scope="col">Reject</th>
       </tr>
     </thead>
-  <% if @pets %>
+    <% if @pets || @all_approved_pets %>
   <% @application.pets.each do |pet| %>
   <tbody>
     <tr>
@@ -31,7 +31,7 @@
       <td><%= pet.adoptable %></td>
       <% if pet.adoptable  %>
       <td><%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "approve", :pet_id => pet.id, :application_id => @application.id, :method => :post }, class: 'btn btn-success' %></td>
-      <td><%= button_to "Reject #{pet.name} Adoption Request", params: { :controller => 'admins', :action => "reject", :reject => pet.id, :application_id => @application.id }, :method => :patch, class: 'btn btn-danger'  %></td>
+      <td><%= button_to "Reject #{pet.name} Adoption Request", { :controller => 'admins', :action => "reject", :reject => pet.id, :application_id => @application.id }, :method => :patch, class: 'btn btn-danger'  %></td>
       <% else %>
       <td>Approved</td>
       <td>Approved</td>
@@ -41,7 +41,3 @@
     <% end  %>
   </tbody>
 </table>
-
-<% if @application_rejected %>
-  <% render 'reject' %>
-<% end  %>
