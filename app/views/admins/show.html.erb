@@ -29,9 +29,9 @@
       <td><%= pet.age %></td>
       <td><%= pet.breed %></td>
       <td><%= pet.adoptable %></td>
-      <% if pet.adoptable == true %>
+      <% if pet.adoptable  %>
       <td><%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "approve", :pet_id => pet.id, :application_id => @application.id, :method => :post }, class: 'btn btn-success' %></td>
-      <td><%= button_to "Reject #{pet.name} Adoption Request", params: { :controller => 'admins', :action => "reject", :reject => pet.id, :application_id => @application.id, :method => :delete }, class: 'btn btn-danger'  %></td>
+      <td><%= button_to "Reject #{pet.name} Adoption Request", params: { :controller => 'admins', :action => "reject", :reject => pet.id, :application_id => @application.id }, :method => :patch, class: 'btn btn-danger'  %></td>
       <% else %>
       <td>Approved</td>
       <td>Approved</td>

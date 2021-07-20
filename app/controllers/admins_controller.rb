@@ -27,7 +27,6 @@ class AdminsController < ApplicationController
   end
 
   def reject
-    require "pry"; binding.pry
     @application = Application.find(params[:id])
     @application.update!(status: "Rejected")
 
