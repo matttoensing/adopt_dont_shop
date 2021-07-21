@@ -73,9 +73,9 @@ RSpec.describe Shelter, type: :model do
         pet2 = create(:pet, shelter_id: shelter2.id)
         pet3 = create(:pet, shelter_id: shelter2.id)
         petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id, status: "Pending")
-        petapp1 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id, status: "Pending")
-        petapp1 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id, status: "Pending")
-        petapp1 = PetApplication.create!(application_id: application4.id, pet_id: pet1.id, status: "Approved")
+        petapp2 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id, status: "Pending")
+        petapp3 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id, status: "Pending")
+        petapp4 = PetApplication.create!(application_id: application4.id, pet_id: pet1.id, status: "Approved")
 
         expected = [shelter1, shelter2]
 
