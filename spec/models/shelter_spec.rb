@@ -83,6 +83,42 @@ RSpec.describe Shelter, type: :model do
       end
     end
 
+    describe '#number_of_adoptions' do
+      it 'returns number of pets that have been adopted from a given shelter' do
+        Shelter.destroy_all
+
+        shelter1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
+        shelter2 = Shelter.create!(name: 'Westminster shelter', city: 'Westminster, CO', foster_program: true, rank: 7)
+        shelter3 = Shelter.create!(name: 'Boulder shelter', city: 'Boulder, CO', foster_program: true, rank: 9)
+        application1 = create(:application, status: "Approved")
+        application2 = create(:application, status: "Approved")
+        application3 = create(:application, status: "Approved")
+        application4 = create(:application, status: "Approved")
+        pet1 = create(:pet, shelter_id: shelter1.id)
+        pet2 = create(:pet, shelter_id: shelter1.id)
+        pet3 = create(:pet, shelter_id: shelter1.id)
+        pet4 = create(:pet, shelter_id: shelter1.id)
+        pet5 = create(:pet, shelter_id: shelter2.id)
+        pet6 = create(:pet, shelter_id: shelter2.id)
+        pet7 = create(:pet, shelter_id: shelter2.id)
+        pet8 = create(:pet, shelter_id: shelter3.id)
+        pet9 = create(:pet, shelter_id: shelter3.id)
+        petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id, status: "Approved")
+        petapp2 = PetApplication.create!(application_id: application1.id, pet_id: pet5.id, status: "Approved")
+        petapp3 = PetApplication.create!(application_id: application1.id, pet_id: pet7.id, status: "Approved")
+        petapp4 = PetApplication.create!(application_id: application2.id, pet_id: pet8.id, status: "Approved")
+        petapp5 = PetApplication.create!(application_id: application2.id, pet_id: pet3.id, status: "Approved")
+        petapp6 = PetApplication.create!(application_id: application2.id, pet_id: pet9.id, status: "Approved")
+        petapp7 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id, status: "Approved")
+        petapp8 = PetApplication.create!(application_id: application3.id, pet_id: pet6.id, status: "Approved")
+        petapp9 = PetApplication.create!(application_id: application3.id, pet_id: pet4.id, status: "Approved")
+
+        expect(Shelter.number_of_adoptions(shelter1.id)).to eq(4)
+        expect(Shelter.number_of_adoptions(shelter2.id)).to eq(3)
+        expect(Shelter.number_of_adoptions(shelter3.id)).to eq(2)
+      end
+    end
+
     describe '#order_by_name' do
       it 'returns shelters in ascending alphabetical order' do
         Shelter.destroy_all
