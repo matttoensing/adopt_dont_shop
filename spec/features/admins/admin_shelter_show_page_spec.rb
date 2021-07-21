@@ -48,4 +48,29 @@ RSpec.describe 'admin shelter show page' do
       expect(page).to have_content("Number of Pets Adopted: #{Shelter.number_of_adoptions(shelter.id)}")
     end
   end
+
+  describe 'action needed' do
+    it 'has a section on the page that shows each shelters pet that has a pending application' do
+      shelter = Shelter.create!(name: 'Boulder Valley Shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
+      application1 = create(:application, status: "Pending")
+      application2 = create(:application, status: "Pending")
+      application3 = create(:application, status: "Approved")
+      pet1 = create(:pet, shelter_id: shelter.id)
+      pet2 = create(:pet, shelter_id: shelter.id)
+      pet3 = create(:pet, shelter_id: shelter.id)
+      pet4 = create(:pet, shelter_id: shelter.id)
+      pet5 = create(:pet, shelter_id: shelter.id)
+      petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id, status: "Pending")
+      petapp2 = PetApplication.create!(application_id: application1.id, pet_id: pet2.id, status: "Pending")
+      petapp3 = PetApplication.create!(application_id: application2.id, pet_id: pet3.id, status: "Pending")
+      petapp4 = PetApplication.create!(application_id: application3.id, pet_id: pet4.id, status: "Approved")
+
+      visit "/admin/shelters/#{shelter.id}"
+
+      expect(page).to have_content("Action Needed")
+      expect(page).to have_content("Pending #{pet1.name}")
+      expect(page).to have_content("Pending #{pet2.name}")
+      expect(page).to have_content("Pending #{pet3.name}")
+    end
+  end
 end

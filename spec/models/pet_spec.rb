@@ -52,6 +52,25 @@ RSpec.describe Pet, type: :model do
         expect(Pet.find_by_search_name('claw')).to eq([@pet_2])
       end
     end
+
+    describe '#pending_applications' do
+      it 'can find pets with pending pet applications' do
+        shelter = Shelter.create(name: 'Voulder Valley Shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+        application1 = create(:application, status: "Pending")
+        application2 = create(:application, status: "Pending")
+        application3 = create(:application, status: "Approved")
+        pet1 = create(:pet, shelter_id: shelter.id)
+        pet2 = create(:pet, shelter_id: shelter.id)
+        pet3 = create(:pet, shelter_id: shelter.id)
+        petapp1 = PetApplication.create!(pet_id: pet1.id, application_id: application1.id, status: "Pending")
+        petapp2 = PetApplication.create!(pet_id: pet2.id, application_id: application2.id, status: "Pending")
+        petapp3 = PetApplication.create!(pet_id: pet3.id, application_id: application3.id, status: "Approved")
+
+        expected = [pet1, pet2]
+
+        expect(Pet.pending_applications).to eq(expected)
+      end
+    end
   end
 
     describe 'instance methods' do
