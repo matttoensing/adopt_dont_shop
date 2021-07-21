@@ -2,14 +2,6 @@
 class AdminsController < ApplicationController
   def show
     @application = Application.find(params[:id])
-    @pets = @application.pets
-    if params[:pet_id]
-      @all_approved_pets = @application.pets.approved
-      @not_approved = @application.pets.not_approved(params[:pet_id])
-    else params[:reject]
-      @application_rejected = Application.find(params[:id])
-      @pet_rejected = Pet.find_by_application_id(params[:id])
-    end
   end
 
   def approve
@@ -17,15 +9,19 @@ class AdminsController < ApplicationController
     @application.update!(status: "Approved")
     @pet = Pet.find(params[:pet_id])
     @pet.update!(adoptable: false)
+    @pet_app = PetApplication.find_with_ids(@application.id, @pet.id)
+    @pet_app.update!(status: "Approved")
 
-    redirect_to(controller: 'admins', action: 'show', id: @application.id, pet_id: @pet.id)
+    render '/admins/_accept'
   end
 
   def reject
     @application = Application.find(params[:id])
     @application.update!(status: "Rejected")
+    @pet = Pet.find(params[:reject])
+    @pet_app = PetApplication.find_with_ids(@application.id, @pet.id)
+    @pet_app.update!(status: "Rejected")
 
     render '/admins/_reject'
-    # redirect_to(controller: 'admins', action: 'show', id: @application.id, reject: "true")
   end
 end
