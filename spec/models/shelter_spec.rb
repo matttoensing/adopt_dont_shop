@@ -94,6 +94,7 @@ RSpec.describe Shelter, type: :model do
         application2 = create(:application, status: "Approved")
         application3 = create(:application, status: "Approved")
         application4 = create(:application, status: "Approved")
+        application5 = create(:application, status: "Approved")
         pet1 = create(:pet, shelter_id: shelter1.id)
         pet2 = create(:pet, shelter_id: shelter1.id)
         pet3 = create(:pet, shelter_id: shelter1.id)
@@ -112,6 +113,8 @@ RSpec.describe Shelter, type: :model do
         petapp7 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id, status: "Approved")
         petapp8 = PetApplication.create!(application_id: application3.id, pet_id: pet6.id, status: "Approved")
         petapp9 = PetApplication.create!(application_id: application3.id, pet_id: pet4.id, status: "Approved")
+        petapp10 = PetApplication.create!(application_id: application5.id, pet_id: pet6.id, status: "Pending")
+        petapp11 = PetApplication.create!(application_id: application5.id, pet_id: pet4.id, status: "Pending")
 
         expect(Shelter.number_of_adoptions(shelter1.id)).to eq(4)
         expect(Shelter.number_of_adoptions(shelter2.id)).to eq(3)

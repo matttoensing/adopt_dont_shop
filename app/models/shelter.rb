@@ -37,14 +37,18 @@ class Shelter < ApplicationRecord
   end
 
   def self.order_in_reverse
-    Shelter.find_by_sql("SELECT * FROM shelters ORDER BY shelters.name desc")
+    Shelter.find_by_sql('SELECT * FROM shelters ORDER BY shelters.name desc')
   end
 
   def self.shelters_with_pending_apps
-    Shelter.joins(pets: [:pet_applications]).where("status = ?", "Pending").distinct
+    Shelter.joins(pets: [:pet_applications]).where('status = ?', 'Pending').distinct
   end
 
   def self.order_by_name
     Shelter.order(:name)
+  end
+
+  def self.number_of_adoptions(shelterid)
+    Shelter.select('shelters.id AS shelter_id').joins(pets: [:pet_applications]).where('shelter_id = ?', shelterid).where('status = ?', "Approved").count('status')
   end
 end
