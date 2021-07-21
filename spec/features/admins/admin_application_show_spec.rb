@@ -133,5 +133,21 @@ RSpec.describe 'admin application show page' do
 
       expect(page).to have_content("Pet Adoptable: false")
     end
+
+    it 'if 2 applications exist for the same pet, one apporved and one pending, when visiting the pending app show page no button to approve exists, only reject' do
+      shelter = Shelter.create!(name: 'Boulder Valley Shelter', city: 'Boulder, CO', foster_program: true, rank: 8)
+      application1 = create(:application, status: "Approved")
+      application2 = create(:application, status: "Pending")
+      pet1 = create(:pet, shelter_id: shelter.id)
+      pet2 = create(:pet, shelter_id: shelter.id)
+      petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id, status: "Approved")
+      petapp2 = PetApplication.create!(application_id: application1.id, pet_id: pet2.id, status: "Approved")
+      petapp2 = PetApplication.create!(application_id: application2.id, pet_id: pet1.id, status: "Pending")
+
+      visit "/admin/applications/#{application2.id}"
+
+      expect(page).to_not have_button("Approve #{pet1.name}")
+      expect(page).to have_button("Reject #{pet1.name} Adoption Request")
+    end
   end
 end
