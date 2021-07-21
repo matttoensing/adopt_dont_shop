@@ -9,14 +9,12 @@ RSpec.describe 'new application page' do
     fill_in "city", with: "Denver"
     fill_in "state", with: "CO"
     fill_in "zip_code", with: "80302"
-    fill_in "description", with: "I love Animals and want to adopt a new pet to look after"
 
     click_on "Create Application"
 
     expect(page).to have_content("Lauren Wilson")
     expect(page).to have_content("3425 S. Huntington Pl")
     expect(page).to have_content("Denver, CO 80302")
-    expect(page).to have_content("I love Animals and want to adopt a new pet to look after")
     expect(page).to have_content("Application Status: In Progress")
   end
 
@@ -27,7 +25,6 @@ RSpec.describe 'new application page' do
     fill_in "city", with: "Denver"
     fill_in "state", with: "CO"
     fill_in "zip_code", with: "80302"
-    fill_in "description", with: "I love Animals and want to adopt a new pet to look after"
 
     click_on "Create Application"
 

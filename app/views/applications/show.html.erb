@@ -8,20 +8,8 @@
   </div>
   </div>
 
-<% if @pet_on_app %>
-  <% @pet_on_app.each do |pet| %>
-  <p>Pets Applied For: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
-  <% end %>
-<% end %>
-
-<% if @pets_for_app %>
-  <% @pets_for_app.each do |pet| %>
-  <p>Pets Applied For: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
-  <% end %>
-<% end %>
-
-<% if @applied_for %>
-  <% @applied_for.each do |pet| %>
+<% if @pet_on_app || @pets_for_app || @applied_for%>
+  <% @application.pets.each do |pet| %>
   <p>Pets Applied For: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
   <% end %>
 <% end %>
