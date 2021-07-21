@@ -8,7 +8,7 @@
   </div>
   </div>
 
-<% if @pet_on_app || @pets_for_app || @applied_for%>
+<% if @pet_on_app || @pets_for_app || @applied_for %>
   <% @application.pets.each do |pet| %>
   <p>Pets Applied For: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
   <% end %>
