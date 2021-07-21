@@ -17,7 +17,7 @@ RSpec.describe 'the veterinarian update' do
     it "submits the edit form and updates the veterinarian" do
       Pet.destroy_all
       Shelter.destroy_all
-      
+
       shelter = Shelter.create(name: 'Heavenly pets', city: 'Aurora, CO', foster_program: true, rank: 7)
       pet = Pet.create(adoptable: true, age: 3, breed: 'GSD', name: 'Charlie', shelter_id: shelter.id)
 
