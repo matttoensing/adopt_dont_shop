@@ -40,7 +40,7 @@ RSpec.describe 'admin shelter show page' do
       expect(page).to have_content("Statistics")
       expect(page).to have_content("Number of Pets: #{shelter.pet_count}")
       expect(page).to have_content("Average Pet Age: #{shelter.average_pet_age}")
-      expect(page).to have_content("Number of Adoptable Pets: #{shelter.adoptable_pets}")
+      expect(page).to have_content("Number of Adoptable Pets: #{shelter.adoptable_pets_count}")
     end
 
     it 'has a section for number of pets that have been adopted from the shelter' do
