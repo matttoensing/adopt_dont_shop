@@ -7,8 +7,8 @@ RSpec.describe 'admin application show page' do
       application = create(:application, status: "Pending")
       pet1 = create(:pet, shelter_id: shelter.id)
       pet2 = create(:pet, shelter_id: shelter.id)
-      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id)
-      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id)
+      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id, status: "Pending")
+      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id, status: "Pending")
 
       visit "/admin/applications/#{application.id}"
 
@@ -21,8 +21,8 @@ RSpec.describe 'admin application show page' do
       application = create(:application, status: "Pending")
       pet1 = create(:pet, shelter_id: shelter.id)
       pet2 = create(:pet, shelter_id: shelter.id)
-      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id)
-      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id)
+      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id, status: "Pending")
+      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id, status: "Pending")
 
       visit "/admin/applications/#{application.id}"
 
@@ -38,8 +38,8 @@ RSpec.describe 'admin application show page' do
       application = create(:application, status: "Pending")
       pet1 = create(:pet, shelter_id: shelter.id)
       pet2 = create(:pet, shelter_id: shelter.id)
-      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id)
-      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id)
+      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id, status: "Pending")
+      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id, status: "Pending")
 
       visit "/admin/applications/#{application.id}"
 
@@ -57,8 +57,8 @@ RSpec.describe 'admin application show page' do
       application = create(:application, status: "Pending")
       pet1 = create(:pet, shelter_id: shelter.id)
       pet2 = create(:pet, shelter_id: shelter.id)
-      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id)
-      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id)
+      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id, status: "Pending")
+      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id, status: "Pending")
 
       visit "/admin/applications/#{application.id}"
 
@@ -71,16 +71,17 @@ RSpec.describe 'admin application show page' do
       application = create(:application, status: "Pending")
       pet1 = create(:pet, shelter_id: shelter.id)
       pet2 = create(:pet, shelter_id: shelter.id)
-      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id)
-      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id)
+      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id, status: "Pending")
+      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id, status: "Pending")
 
       visit "/admin/applications/#{application.id}"
 
       click_on "Reject #{pet1.name} Adoption Request"
-      
+
       expect(page).to_not have_button("Reject #{pet1.name} Adoption Request")
+      expect(page).to have_button("Reject #{pet2.name} Adoption Request")
       expect(page).to have_content("Status: Rejected")
-      expect(page).to have_content("#{pet1.name} Rejected")
+      expect(page).to have_content("#{application.name} Rejected")
     end
 
     it 'clicking reject on one application does not affect other applications for the same pet' do
@@ -90,16 +91,16 @@ RSpec.describe 'admin application show page' do
       application3 = create(:application, status: "Pending")
       pet1 = create(:pet, shelter_id: shelter.id)
       pet2 = create(:pet, shelter_id: shelter.id)
-      petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id)
-      petapp2 = PetApplication.create!(application_id: application1.id, pet_id: pet2.id)
-      petapp3 = PetApplication.create!(application_id: application2.id, pet_id: pet1.id)
-      petapp4 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id)
+      petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id, status: "Pending")
+      petapp2 = PetApplication.create!(application_id: application1.id, pet_id: pet2.id, status: "Pending")
+      petapp3 = PetApplication.create!(application_id: application2.id, pet_id: pet1.id, status: "Pending")
+      petapp4 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id, status: "Pending")
 
       visit "/admin/applications/#{application1.id}"
 
       click_on "Reject #{pet1.name} Adoption Request"
 
-      expect(page).to have_content("#{pet1.name} Rejected")
+      expect(page).to have_content("#{application1.name} Rejected")
 
       visit "/admin/applications/#{application2.id}"
 
@@ -121,8 +122,8 @@ RSpec.describe 'admin application show page' do
       application = create(:application, status: "Pending")
       pet1 = create(:pet, shelter_id: shelter.id)
       pet2 = create(:pet, shelter_id: shelter.id)
-      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id)
-      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id)
+      petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id, status: "Pending")
+      petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id, status: "Pending")
 
       visit "/admin/applications/#{application.id}"
 
