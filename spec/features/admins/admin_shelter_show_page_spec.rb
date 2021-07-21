@@ -67,10 +67,14 @@ RSpec.describe 'admin shelter show page' do
 
       visit "/admin/shelters/#{shelter.id}"
 
-      expect(page).to have_content("Action Needed")
+      expect(page).to have_content("Action Required")
       expect(page).to have_content("Pending #{pet1.name}")
       expect(page).to have_content("Pending #{pet2.name}")
       expect(page).to have_content("Pending #{pet3.name}")
+    end
+
+    it '' do
+
     end
   end
 end

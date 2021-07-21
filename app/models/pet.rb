@@ -19,4 +19,8 @@ class Pet < ApplicationRecord
   def self.find_by_search_name(search)
     Pet.where('lower(name) LIKE ?', "%#{search.downcase}%")
   end
+
+  def self.pending_applications
+    Pet.joins(:pet_applications).where('status = ?', 'Pending')
+  end
 end

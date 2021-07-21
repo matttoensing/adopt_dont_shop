@@ -9,6 +9,20 @@
   </div>
 </div>
 
+<h3>Action Required</h3>
+<% @pets_pending.each do |pet| %>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Pending <%= pet.name %></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><%= pet.age %> years old</h6>
+    <p class="card-text"><%= pet.breed %></p>
+    <p class="card-text"><%= pet.shelter_name %></p>
+    <a href="#" class="card-link"><%= link_to "Update #{pet.name}", "pets/#{pet.id}/edit", class: "btn btn-primary" %></a>
+    <a href="#" class="card-link"><%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete, class: "btn btn-danger" %></a>
+  </div>
+</div>
+<% end %>
+
 <h3>Statistics</h3>
 <p>Number of Pets: <%= @shelter.pet_count %></p>
 <p>Average Pet Age: <%= @shelter.average_pet_age %></p>
