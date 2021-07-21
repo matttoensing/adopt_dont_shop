@@ -49,37 +49,27 @@ RSpec.describe Application do
         expect(application.status).to eq("Rejected")
       end
     end
-  end
 
-  describe 'class methods' do
-    # describe '#pets_not_approved' do
-    #   it 'can find all pets not on application that are not the given pet id' do
-    #     shelter1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
-    #     application = create(:application, status: "Approved")
-    #     pet1 = create(:pet, adoptable: false, shelter_id: shelter1.id)
-    #     pet2 = create(:pet, shelter_id: shelter1.id)
-    #     pet3 = create(:pet, shelter_id: shelter1.id)
-    #     petapp1 = PetApplication.create!(application_id: application.id, pet_id: pet1.id)
-    #     petapp2 = PetApplication.create!(application_id: application.id, pet_id: pet2.id)
-    #     petapp3 = PetApplication.create!(application_id: application.id, pet_id: pet3.id)
-    #
-    #     expected = [pet2, pet3]
-    #
-    #     expect(application.pets_not_approved(pet1.id)).to eq(expected)
-    #
-    #     shelter2 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
-    #     application2 = create(:application, status: "Approved")
-    #     pet4 = create(:pet, adoptable: false, shelter_id: shelter1.id)
-    #     pet5 = create(:pet, adoptable: false, shelter_id: shelter1.id)
-    #     pet6 = create(:pet, shelter_id: shelter1.id)
-    #     petapp4 = PetApplication.create!(application_id: application.id, pet_id: pet1.id)
-    #     petapp5 = PetApplication.create!(application_id: application.id, pet_id: pet2.id)
-    #     petapp6 = PetApplication.create!(application_id: application.id, pet_id: pet3.id)
-    #
-    #     expected2 = [pet3]
-    #
-    #     expect(application.pets_not_approved(pet3.id)).to eq(expected2)
-    #   end
-    # end
+    describe '#find_pet_apps' do
+      xit 'can find all pet applications for an application' do
+        shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
+        application1 = create(:application)
+        application2 = create(:application)
+        pet1 = create(:pet, shelter_id: shelter.id)
+        pet2 = create(:pet, shelter_id: shelter.id)
+        pet3 = create(:pet, shelter_id: shelter.id)
+        pet4 = create(:pet, shelter_id: shelter.id)
+        pet5 = create(:pet, shelter_id: shelter.id)
+        pet_app1 = PetApplication.create!(pet_id: pet1.id, application_id: application1.id, status: "Pending")
+        pet_app2 = PetApplication.create!(pet_id: pet2.id, application_id: application1.id, status: "Pending")
+        pet_app3 = PetApplication.create!(pet_id: pet3.id, application_id: application1.id, status: "Pending")
+        pet_app4 = PetApplication.create!(pet_id: pet3.id, application_id: application2.id, status: "Pending")
+        pet_app5 = PetApplication.create!(pet_id: pet1.id, application_id: application2.id, status: "Pending")
+
+        expected = [pet_app1, pet_app2, pet_app3]
+
+        expect(application1.find_pet_apps).to eq(expected)
+      end
+    end
   end
 end
