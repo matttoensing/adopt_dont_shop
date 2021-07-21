@@ -57,7 +57,7 @@ RSpec.describe Shelter, type: :model do
     end
 
     describe '#shelters_with_pending_apps' do
-      it 'returns all shelters with pending applications in alphabetical order' do
+      it 'returns all shelters with pending applications' do
         Shelter.destroy_all
 
         shelter1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
@@ -67,18 +67,33 @@ RSpec.describe Shelter, type: :model do
         application2 = create(:application)
         application3 = create(:application, status: "Pending")
         application4 = create(:application, status: "Pending")
-        application5 = create(:application)
+        application5 = create(:application, status: "Approved")
         application6 = create(:application)
         pet1 = create(:pet, shelter_id: shelter1.id)
         pet2 = create(:pet, shelter_id: shelter2.id)
         pet3 = create(:pet, shelter_id: shelter2.id)
-        petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id)
-        petapp1 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id)
-        petapp1 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id)
+        petapp1 = PetApplication.create!(application_id: application1.id, pet_id: pet1.id, status: "Pending")
+        petapp2 = PetApplication.create!(application_id: application3.id, pet_id: pet2.id, status: "Pending")
+        petapp3 = PetApplication.create!(application_id: application4.id, pet_id: pet3.id, status: "Pending")
+        petapp4 = PetApplication.create!(application_id: application4.id, pet_id: pet1.id, status: "Approved")
 
         expected = [shelter1, shelter2]
 
         expect(Shelter.shelters_with_pending_apps).to eq(expected)
+      end
+    end
+
+    describe '#order_by_name' do
+      it 'returns shelters in ascending alphabetical order' do
+        Shelter.destroy_all
+
+        shelter1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 5)
+        shelter2 = Shelter.create!(name: 'Westminster shelter', city: 'Westminster, CO', foster_program: true, rank: 7)
+        shelter3 = Shelter.create!(name: 'Boulder shelter', city: 'Boulder, CO', foster_program: true, rank: 9)
+
+        expected = [shelter1, shelter3, shelter2]
+
+        expect(Shelter.order_by_name).to eq(expected)
       end
     end
   end

@@ -26,7 +26,7 @@
 </table>
 
 <h3>Shelter's with Pending Applications</h3><br>
-<% @shelters_with_pends.each do |shelter| %>
+<% @shelters_with_pends.order_by_name.each do |shelter| %>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">Shelter: <%= shelter.name %></h5>

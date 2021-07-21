@@ -27,10 +27,16 @@
       <td><%= pet.name %></td>
       <td><%= pet.age %></td>
       <td><%= pet.breed %></td>
+      <% if pet.adoptable %>
       <td>Pending</td>
       <td><%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "approve", :pet_id => pet.id, :application_id => @application.id, :method => :post }, class: 'btn btn-success' %></td>
       <td><%= button_to "Reject #{pet.name} Adoption Request", { :controller => 'admins', :action => "reject", :reject => pet.id, :application_id => @application.id }, :method => :patch, class: 'btn btn-danger'  %></td>
     </tr>
+    <% else  %>
+    <td>Approved</td>
+    <td>Approved</td>
+    <td>Approved</td>
     <% end  %>
+  <% end  %>
   </tbody>
 </table>

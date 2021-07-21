@@ -44,10 +44,10 @@ Rails.application.routes.draw do
   patch '/applications/:id', to: 'applications#update'
   post '/petapplications', to: 'pet_applications#update'
 
-  get '/admin/shelters', to: 'admins#index'
+  get '/admin/shelters', to: 'admin_shelters#index'
   get '/admin/applications/:id', to: 'admins#show'
-  post '/admin/applications/:id', to: 'admins#show'
-  delete '/admin/applications/:id', to: 'admins#delete'
+  post '/admin/applications/:id', to: 'admins#approve'
+  patch '/admin/applications/:id', to: 'admins#reject'
 
   get '/admin/shelters/:id', to: 'admin_shelters#show'
 end

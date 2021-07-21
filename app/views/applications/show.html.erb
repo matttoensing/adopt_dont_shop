@@ -29,17 +29,17 @@
 <% if @pet_on_app %>
 <%= form_tag("/applications/#{@application.id}", method: :patch) do %>
 <div class="form-group">
-  <label for="exampleFormControlTextarea1"><%= label_tag(:description, "Why Would You Make a Great Pet Owner?") %></label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"<%= text_field_tag(:description, params[:description]) %></textarea><br>
-    <%= submit_tag("Submit Application", class: "btn btn-primary") %>
+  <label for="exampleFormControlTextarea1"><%= label_tag(:description, "Tell Us More About Yourself?") %></label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"<%= text_field_tag(:description, params[:description], placeholder: "Why Would You Make a Great Pet Owner?") %></textarea><br>
+    <%= submit_tag("Submit Application", class: "btn btn-primary") %><br>
 </div>
   <% end %>
 <% end %>
 
 <% if !@pets_for_app %>
 <%= form_tag("/applications/#{@application.id}?seach=name", method: :get, local: true) do %>
-  <%= label_tag(:search, "Add a Pet to this Application") %>
-  <%= text_field_tag(:search, params[:search]) %>
+  <br><h5><%= label_tag(:search, "Add a Pet to this Application") %></h5>
+  <%= text_field_tag(:search, params[:search], placeholder: "Search for Pets") %>
   <%= submit_tag('Submit', class: 'btn btn-success') %><br>
 <% end %>
 <% end %>
