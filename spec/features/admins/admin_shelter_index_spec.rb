@@ -9,9 +9,20 @@ RSpec.describe 'admin shelter index page' do
 
       visit '/admin/shelters'
 
-      expect(page).to have_link("#{shelter1.name}")
-      expect(page).to have_link("#{shelter2.name}")
-      expect(page).to have_link("#{shelter3.name}")
+      within "#shelter-#{shelter1.id}" do
+        expect(page).to have_content(shelter1.city)
+        expect(page).to have_link("#{shelter1.name}")
+      end
+
+      within "#shelter-#{shelter2.id}" do
+        expect(page).to have_content(shelter1.city)
+        expect(page).to have_link("#{shelter1.name}")
+      end
+
+      within "#shelter-#{shelter3.id}" do
+        expect(page).to have_content(shelter3.city)
+        expect(page).to have_link("#{shelter3.name}")
+      end
     end
 
     it 'when clicking on the shelter name, you are taken to the admin shelter show page' do
