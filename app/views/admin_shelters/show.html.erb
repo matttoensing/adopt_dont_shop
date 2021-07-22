@@ -2,7 +2,8 @@
   <div class="card-body">
     <h5 class="card-title"><%= @shelter.name %></h5>
     <p class="card-text">Rank: <%= @shelter.rank %></p>
-    <p class="card-text">Rank: City: <%= @shelter.city %></p>
+    <p class="card-text">Rank: <%= @shelter.city %></p>
+    <p class="card-text">Address: <%= @address %></p>
     <a href="#" class="card-link"><%= link_to "All pets at #{@shelter.name}", "/shelters/#{@shelter.id}/pets", class: 'btn btn-primary' %></a><br/>
     <a href="#" class="card-link"><%= link_to "Edit #{@shelter.name}", "/shelters/#{@shelter.id}/edit", method: :delete, class: 'btn btn-warning' %></a><br/>
     <a href="#" class="card-link"><%= link_to "Delete #{@shelter.name}", "/shelters/#{@shelter.id}", method: :delete, class: 'btn btn-danger' %></a><br/>
