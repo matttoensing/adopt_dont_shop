@@ -43,6 +43,7 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @application.update({description: params[:description], status: "Pending"})
     @pets_for_app = @application.pets
+
     redirect_to(controller: 'applications', action: 'show', id: @application.id, description: "true")
   end
 

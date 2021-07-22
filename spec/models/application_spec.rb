@@ -13,7 +13,6 @@ RSpec.describe Application do
     it { should validate_presence_of(:state) }
     it { should validate_presence_of(:zip_code) }
     it { should validate_presence_of(:status) }
-    it { should validate_presence_of(:description) }
   end
 
   describe 'instance methods' do
@@ -47,28 +46,6 @@ RSpec.describe Application do
         application.change_status_rejected
 
         expect(application.status).to eq("Rejected")
-      end
-    end
-
-    describe '#find_pet_apps' do
-      xit 'can find all pet applications for an application' do
-        shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
-        application1 = create(:application)
-        application2 = create(:application)
-        pet1 = create(:pet, shelter_id: shelter.id)
-        pet2 = create(:pet, shelter_id: shelter.id)
-        pet3 = create(:pet, shelter_id: shelter.id)
-        pet4 = create(:pet, shelter_id: shelter.id)
-        pet5 = create(:pet, shelter_id: shelter.id)
-        pet_app1 = PetApplication.create!(pet_id: pet1.id, application_id: application1.id, status: "Pending")
-        pet_app2 = PetApplication.create!(pet_id: pet2.id, application_id: application1.id, status: "Pending")
-        pet_app3 = PetApplication.create!(pet_id: pet3.id, application_id: application1.id, status: "Pending")
-        pet_app4 = PetApplication.create!(pet_id: pet3.id, application_id: application2.id, status: "Pending")
-        pet_app5 = PetApplication.create!(pet_id: pet1.id, application_id: application2.id, status: "Pending")
-
-        expected = [pet_app1, pet_app2, pet_app3]
-
-        expect(application1.find_pet_apps).to eq(expected)
       end
     end
   end
