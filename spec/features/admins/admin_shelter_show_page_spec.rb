@@ -12,9 +12,9 @@ RSpec.describe 'admin shelter show page' do
       visit "/admin/shelters/#{shelter.id}"
 
       expect(page).to have_content("Statistics")
-      expect(page).to have_content("Number of Pets: #{shelter.pet_count}")
-      expect(page).to have_content("Average Pet Age: #{shelter.average_pet_age}")
-      expect(page).to have_content("Number of Adoptable Pets: #{shelter.adoptable_pets_count}")
+      expect(page).to have_content(shelter.pet_count)
+      expect(page).to have_content(shelter.average_pet_age)
+      expect(page).to have_content(shelter.adoptable_pets_count)
     end
 
     it 'has a section for number of pets that have been adopted from the shelter' do
@@ -45,7 +45,7 @@ RSpec.describe 'admin shelter show page' do
 
       visit "/admin/shelters/#{shelter.id}"
 
-      expect(page).to have_content("Number of Pets Adopted: #{Shelter.number_of_adoptions(shelter.id)}")
+      expect(page).to have_content(Shelter.number_of_adoptions(shelter.id))
     end
   end
 
@@ -89,7 +89,7 @@ RSpec.describe 'admin shelter show page' do
       petapp4 = PetApplication.create!(application_id: application3.id, pet_id: pet4.id, status: "Approved")
 
       visit "/admin/shelters/#{shelter.id}"
-      
+
       expect(page).to have_content("Pending Applications: #{application1.name}")
       expect(page).to have_content("Pending Applications: #{application2.name}")
       expect(page).to have_link(application1.name)
