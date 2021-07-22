@@ -55,4 +55,8 @@ class Shelter < ApplicationRecord
   def self.number_of_adoptions(shelterid)
     Shelter.select('shelters.id AS shelter_id').joins(pets: [:pet_applications]).where('shelter_id = ?', shelterid).where('status = ?', "Approved").count('status')
   end
+
+  def self.full_address(shelterid)
+    Shelter.find_by_sql("SELECT CONCAT(street_number, ' ', street_name, ' ', city,', ', state_name, ' ',zip_code) AS address FROM shelters WHERE id = #{shelterid}").pluck(:address).first
+  end
 end

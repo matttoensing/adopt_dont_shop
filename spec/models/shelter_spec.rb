@@ -135,6 +135,16 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.order_by_name).to eq(expected)
       end
     end
+
+    describe '#full_address' do
+      it 'puts all address attributes into one' do
+        shelter = create(:shelter, street_number: "1234", street_name: "Main St.", city: "Boulder", state_name: "CO", zip_code: "81230")
+
+        expected = "1234 Main St. Boulder, CO 81230"
+
+        expect(Shelter.full_address(shelter.id)).to eq(expected)
+      end
+    end
   end
 
   describe 'instance methods' do
