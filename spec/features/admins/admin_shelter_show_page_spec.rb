@@ -89,14 +89,11 @@ RSpec.describe 'admin shelter show page' do
       petapp4 = PetApplication.create!(application_id: application3.id, pet_id: pet4.id, status: "Approved")
 
       visit "/admin/shelters/#{shelter.id}"
-
-      expect(page).to have_link()
-#       Action Required Links to Application Show Page
-#
-# As a visitor
-# When I visit an admin shelter show page
-# And I look in the "Action Required" section
-# Then next to each pet's name I see a link to the admin application show page where I can accept or reject the pet.
+      
+      expect(page).to have_content("Pending Applications: #{application1.name}")
+      expect(page).to have_content("Pending Applications: #{application2.name}")
+      expect(page).to have_link(application1.name)
+      expect(page).to have_link(application2.name)
     end
   end
 end
