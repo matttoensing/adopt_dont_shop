@@ -4,12 +4,13 @@
     <p class="card-text">Rank: <%= @shelter.rank %></p>
     <p class="card-text">Rank: City: <%= @shelter.city %></p>
     <a href="#" class="card-link"><%= link_to "All pets at #{@shelter.name}", "/shelters/#{@shelter.id}/pets", class: 'btn btn-primary' %></a><br/>
-    <a href="#" class="card-link"><%= link_to "Edit #{@shelter.name}", "/shelters/#{@shelter.id}/edit", method: :delete, class: 'btn btn-danger' %></a>
-    <a href="#" class="card-link"><%= link_to "Delete #{@shelter.name}", "/shelters/#{@shelter.id}", method: :delete, class: 'btn btn-danger' %></a>
+    <a href="#" class="card-link"><%= link_to "Edit #{@shelter.name}", "/shelters/#{@shelter.id}/edit", method: :delete, class: 'btn btn-warning' %></a><br/>
+    <a href="#" class="card-link"><%= link_to "Delete #{@shelter.name}", "/shelters/#{@shelter.id}", method: :delete, class: 'btn btn-danger' %></a><br/>
   </div>
 </div>
-
+<br>
 <h3>Action Required</h3>
+<br>
 <% @pets_pending.each do |pet| %>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
@@ -26,10 +27,60 @@
     <a href="#" class="card-link"><%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete, class: "btn btn-danger" %></a>
   </div>
 </div>
+<br>
 <% end %>
-
+<br>
 <h3>Statistics</h3>
-<p>Number of Pets: <%= @shelter.pet_count %></p>
-<p>Average Pet Age: <%= @shelter.average_pet_age %></p>
-<p>Number of Adoptable Pets: <%= @shelter.adoptable_pets_count %></p>
-<p>Number of Pets Adopted: <%= @number_of_pets %></p>
+<br>
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Number of Pets
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>Pet Count</strong> <%= @shelter.name %> has <%= @shelter.pet_count %> pets.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Average Pet Age
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>Average age of Pets</strong> The Average age of pets at <%= @shelter.name %> is <%= @shelter.average_pet_age %> years old.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Adoptable Pets
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>Adoptable Pets</strong> <%= @shelter.name %> currently has <%= @shelter.adoptable_pets_count %> available for adoption.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Number of Pets Adopted
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>Number of Pets Adopted</strong> <%= @shelter.name %> has approved <%= @number_of_pets %> adoptions.
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
