@@ -12,6 +12,7 @@
     </tr>
   </thead>
 <% @shelters.each do |shelter| %>
+<div id="shelter-<%= shelter.id %>">
   <tbody>
     <tr>
       <td><%= link_to "#{shelter.name}", "/admin/shelters/#{shelter.id}", class: 'btn btn-primary' %></td>
@@ -24,7 +25,9 @@
     <% end  %>
   </tbody>
 </table>
+
 <br>
+
 <h3>Shelter's with Pending Applications</h3><br>
 <% @shelters_with_pends.order_by_name.each do |shelter| %>
 <div class="card" style="width: 18rem;">
