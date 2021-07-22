@@ -102,8 +102,8 @@ RSpec.describe 'admin shelter show page' do
       shelter = create(:shelter, street_number: "1234", street_name: "Main St.", city: "Boulder", state_name: "CO", zip_code: "81230")
 
       visit "/admin/shelters/#{shelter.id}"
-
-      expect(page).to have_content(Shelter.full_address(shelter.id))
+      shelter_address = Shelter.full_address(shelter.id)
+      expect(page).to have_content("Address: #{shelter_address}")
     end
   end
 end
