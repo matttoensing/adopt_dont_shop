@@ -17,6 +17,11 @@
     <h6 class="card-subtitle mb-2 text-muted"><%= pet.age %> years old</h6>
     <p class="card-text"><%= pet.breed %></p>
     <p class="card-text"><%= pet.shelter_name %></p>
+    <% pet.applications.each do |app| %>
+    <% if app.status == "Pending" %>
+    <p class="card-text">Pending Applications: <%= link_to "#{app.name}", "/admin/applications/#{app.id}", class: 'btn btn-primary' %></p>
+    <% end %>
+    <% end %>
     <a href="#" class="card-link"><%= link_to "Update #{pet.name}", "pets/#{pet.id}/edit", class: "btn btn-primary" %></a>
     <a href="#" class="card-link"><%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete, class: "btn btn-danger" %></a>
   </div>

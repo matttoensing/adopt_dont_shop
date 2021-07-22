@@ -24,13 +24,14 @@
     <% end  %>
   </tbody>
 </table>
-
+<br>
 <h3>Shelter's with Pending Applications</h3><br>
 <% @shelters_with_pends.order_by_name.each do |shelter| %>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">Shelter: <%= shelter.name %></h5>
-<a href="#" class="card-link"><%= link_to "View", "/shelters/#{shelter.id}", class: 'btn btn-primary' %><br></a>
+<a href="#" class="card-link"><%= link_to 'View', "/admin/shelters/#{shelter.id}", class: 'btn btn-primary' %><br></a>
 </div>
 </div>
+<br>
 <% end %>
