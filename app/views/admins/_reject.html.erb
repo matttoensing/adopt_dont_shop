@@ -32,7 +32,7 @@
       <td>Pending</td>
       <td>Approved For Adoption</td>
       <td><%= button_to "Reject #{pet.name} Adoption Request", { :controller => 'admins', :action => "reject", :reject => pet.id, :application_id => @application.id }, :method => :patch, class: 'btn btn-danger'  %></td>
-      <% elsif app.status == "Pending" && app.pet_id == pet.id %>
+      <% elsif app.status == "Pending" && app.pet_id == pet.id && pet.adoptable == true %>
       <td>Pending</td>
       <td><%= button_to "Approve #{pet.name}", { :controller => 'admins', :action => "reject", :reject => pet.id, :application_id => @application.id }, :method => :patch, class: 'btn btn-success' %></td>
       <td><%= button_to "Reject #{pet.name} Adoption Request", { :controller => 'admins', :action => "reject", :reject => pet.id, :application_id => @application.id }, :method => :patch, class: 'btn btn-danger'  %></td>
@@ -40,6 +40,10 @@
       <td><%= @application.name %> Rejected</td>
       <td>Rejected</td>
       <td>Rejected</td>
+      <% elsif app.status == "Approved" && app.pet_id == pet.id %>
+      <td><%= @application.name %> Approved</td>
+      <td>Approved</td>
+      <td>Approved</td>
     </tr>
     <% end  %>
     <% end %>
